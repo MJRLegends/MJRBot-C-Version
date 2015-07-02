@@ -190,7 +190,7 @@ namespace MJRBot
                 }
                 onlineUsers.Add(username);
             }
-            chatMessages.Add("[MJRBot Info]" + username + " has joined!");
+            //chatMessages.Add("[MJRBot Info]" + username + " has joined!");
         }
 
         /// <summary>

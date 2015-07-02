@@ -35,31 +35,6 @@ namespace MJRBot
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            BotClient.channel = "#" + txtChannel.Text;
-            if (!Directory.Exists(@"C:\MJR_Bot\"))
-                try
-                {
-                    Directory.CreateDirectory(@"C:\MJR_Bot\");
-                }
-                catch (Exception ex)
-                {
-                    BotClient.chatMessages.Add("Unable to create directory!");
-                    return;
-                }
-            if (!Directory.Exists(@"C:\MJR_Bot\" + BotClient.getChannel(false) + @"\"))
-                try
-                {
-                    Directory.CreateDirectory(@"C:\MJR_Bot\" + BotClient.getChannel(false) + @"\");
-                }
-                catch (Exception ex)
-                {
-                    BotClient.chatMessages.Add("Unable to create directory!");
-                    return;
-                }
-
-            PointsFile.load();
-            SettingsFile.load();
-            RanksFile.load();
             if (connected == false)
             {
                 if (txtChannel.Text == "")
@@ -67,6 +42,31 @@ namespace MJRBot
                     BotClient.chatMessages.Add("You need to enter a channel!");
                     return;
                 }
+                BotClient.channel = "#" + txtChannel.Text;
+                if (!Directory.Exists(@"C:\MJR_Bot\"))
+                    try
+                    {
+                        Directory.CreateDirectory(@"C:\MJR_Bot\");
+                    }
+                    catch (Exception ex)
+                    {
+                        BotClient.chatMessages.Add("Unable to create directory!");
+                        return;
+                    }
+                if (!Directory.Exists(@"C:\MJR_Bot\" + BotClient.getChannel(false) + @"\"))
+                    try
+                    {
+                        Directory.CreateDirectory(@"C:\MJR_Bot\" + BotClient.getChannel(false) + @"\");
+                    }
+                    catch (Exception ex)
+                    {
+                        BotClient.chatMessages.Add("Unable to create directory!");
+                        return;
+                    }
+
+                PointsFile.load();
+                SettingsFile.load();
+                RanksFile.load();
                 if (SettingsFile.getSetting("Username") != "" && SettingsFile.getSetting("Password") != "")
                 {
                     BotClient.connectToServer(txtServer.Text, Convert.ToInt32(txtPort.Text));
@@ -83,6 +83,8 @@ namespace MJRBot
                     timerAnnouncements.Enabled = true;
 
                     Viewers.getViewers();
+                    Followers.getFollowersNum();
+                    Followers.getFollowers();
                     btnConnect.Checked = true;
                 }
                 else
@@ -90,11 +92,11 @@ namespace MJRBot
                     BotClient.chatMessages.Add("Error! No Login details were set! Go to settings to enter them! \n then reload the program when done!");
                     return;
                 }
-
             }
             else
             {
                 BotClient.disconnectFromServer();
+                disconnect();
             }
         }
 
@@ -348,6 +350,7 @@ namespace MJRBot
             txtChat.Text = BotClient.getChatMessages();
             txtUsers.Text = BotClient.getUserList();
             lblViewersNumber.Text = BotClient.onlineUsers.Count.ToString();
+            lblFollowersNum.Text = Followers.followersNum.ToString();
         }
         private void timerAutoPoints_Tick(object sender, EventArgs e)
         {

@@ -72,7 +72,7 @@ namespace MJRBot
 
                     writer.WriteStartElement("Settings");
                     writer.WriteAttributeString("SettingName", "SilentJoin");
-                    writer.WriteAttributeString("SettingValue", "false");
+                    writer.WriteAttributeString("SettingValue", "true");
                     writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 

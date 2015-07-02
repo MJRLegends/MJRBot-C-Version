@@ -52,6 +52,7 @@
     <Compile Include="ChatModeration.cs" />
     <Compile Include="Commands.cs" />
     <Compile Include="Files\RanksFile.cs" />
+    <Compile Include="Followers.cs" />
     <Compile Include="Games\FruitMachine.cs" />
     <Compile Include="Games\MathsGame.cs" />
     <Compile Include="Games\Racing Game.cs" />

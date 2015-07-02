@@ -162,8 +162,14 @@ namespace MJRBot
                     uptime = uptime.Substring(0, 19);
                     DateTime date = Convert.ToDateTime(uptime);
                     DateTime nowDate = DateTime.Now;
-                    date = date.ToLocalTime();
+                    BotClient.chatMessages.Add("Stream date " + date);
+                    BotClient.chatMessages.Add("Now date " + nowDate);
+
+                    //date = date.ToUniversalTime();
+                    //nowDate = date.ToUniversalTime();
+                    //BotClient.chatMessages.Add("Converted date " + date);
                     TimeSpan upTime = nowDate.Subtract(date);
+
 
                     BotClient.sendChatMessage(BotClient.getChannel(false) + " has been live for " + upTime.Days + " day(s) " + upTime.Hours + " hour(s) " + upTime.Minutes + " minute(s)");
                 }

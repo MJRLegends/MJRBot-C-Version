@@ -84,16 +84,22 @@ namespace MJRBot
         {
             while (!shouldStop)
             {
-                socketStreamReceiver = new StreamReader(clientSocket.GetStream());
-                string _response = socketStreamReceiver.ReadLine();
-                if (_response != null)
+                try
                 {
-                    Console.WriteLine("> " + _response);
-                    parseChatLine(_response);
+                    socketStreamReceiver = new StreamReader(clientSocket.GetStream());
+                    string _response = socketStreamReceiver.ReadLine();
+                    if (_response != null)
+                    {
+                        Console.WriteLine("> " + _response);
+                        parseChatLine(_response);
+                    }
+                    else
+                    {
+                        //Happens after 10 Min withot sending data
+                    }
                 }
-                else
-                {
-                    //Happens after 10 Min withot sending data
+                catch{
+                    continue;
                 }
             }
         }
@@ -105,14 +111,21 @@ namespace MJRBot
             socketStreamWriter = new StreamWriter(clientSocket.GetStream());
             while (!shouldStop)
             {
-                if (socketCommands.Count > socketIndex)
+                try
                 {
-                    socketStreamWriter.WriteLine(socketCommands[socketIndex]);
-                    Console.WriteLine("< " + socketCommands[socketIndex]);
-                    socketStreamWriter.Flush();
-                    socketIndex++;
+                    if (socketCommands.Count > socketIndex)
+                    {
+                        socketStreamWriter.WriteLine(socketCommands[socketIndex]);
+                        Console.WriteLine("< " + socketCommands[socketIndex]);
+                        socketStreamWriter.Flush();
+                        socketIndex++;
+                    }
+                    Thread.Sleep(1000);
                 }
-                Thread.Sleep(1000);
+                catch
+                {
+                    continue;
+                }
             }
         }
 
@@ -190,7 +203,7 @@ namespace MJRBot
                 }
                 onlineUsers.Add(username);
             }
-            //chatMessages.Add("[MJRBot Info]" + username + " has joined!");
+            chatMessages.Add("[MJRBot Info]" + username + " has joined!");
         }
 
         /// <summary>

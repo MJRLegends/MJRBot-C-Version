@@ -128,8 +128,8 @@ namespace MJRBot
             SettingsFile.setSetting("EmoteWarning", txtEmoteMessage.Text);
             SettingsFile.setSetting("SymbolWarning", txtSymbolMessage.Text);
 
-            timerAnnouncements.Interval = Convert.ToInt32(SettingsFile.getSetting("AnnouncementsDelay"));
-            timerAutoPoints.Interval = Convert.ToInt32(SettingsFile.getSetting("AutoPointsDelay"));
+            timerAnnouncements.Interval = Convert.ToInt32(SettingsFile.getSetting("AnnouncementsDelay")) * 60000;
+            timerAutoPoints.Interval = Convert.ToInt32(SettingsFile.getSetting("AutoPointsDelay")) * 60000;
         }
         private void btnSideTab_Click(object sender, EventArgs e)
         {

@@ -23,7 +23,7 @@ namespace MJRBot
         public static String channel = "";
 
         private static List<string> socketCommands = new List<string>();
-        public static List<string> chatMessages = new List<string>();
+        public static List<string> chatMessages = new List<string>(100);
         public static List<string> onlineUsers = new List<string>();
 
         public static void connectToServer(String server, int port)
@@ -90,7 +90,7 @@ namespace MJRBot
                     string _response = socketStreamReceiver.ReadLine();
                     if (_response != null)
                     {
-                        Console.WriteLine("> " + _response);
+                        //Console.WriteLine("> " + _response);
                         parseChatLine(_response);
                     }
                     else
@@ -116,7 +116,7 @@ namespace MJRBot
                     if (socketCommands.Count > socketIndex)
                     {
                         socketStreamWriter.WriteLine(socketCommands[socketIndex]);
-                        Console.WriteLine("< " + socketCommands[socketIndex]);
+                        //Console.WriteLine("< " + socketCommands[socketIndex]);
                         socketStreamWriter.Flush();
                         socketIndex++;
                     }

@@ -86,6 +86,7 @@ namespace MJRBot
                     Followers.getFollowersNum();
                     Followers.getFollowers();
                     btnConnect.Checked = true;
+                    btnSideTab.Enabled = true;
                 }
                 else
                 {
@@ -107,6 +108,7 @@ namespace MJRBot
             txtChannel.ReadOnly = false;
             timerAutoPoints.Enabled = false;
             btnConnect.Checked = false;
+            btnSideTab.Enabled = false;
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -519,7 +521,7 @@ namespace MJRBot
 
         private void MJRBot_Load(object sender, EventArgs e)
         {
-
+            btnSideTab.Enabled = false;
         }
     }
 }

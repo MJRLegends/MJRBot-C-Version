@@ -32,6 +32,8 @@
             this.tabControlMain = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
             this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
+            this.lblFollowersNum = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.lblViewersNumber = new System.Windows.Forms.Label();
             this.txtMessage = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblSendMessage = new System.Windows.Forms.Label();
@@ -97,8 +99,6 @@
             this.btnModerationEmote = new DevComponents.DotNetBar.ButtonX();
             this.btnModerationLinks = new DevComponents.DotNetBar.ButtonX();
             this.btnModerationSymbol = new DevComponents.DotNetBar.ButtonX();
-            this.lblFollowersNum = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
             this.tabControlMain.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -194,6 +194,28 @@
             this.tabControlPanel3.TabIndex = 3;
             this.tabControlPanel3.TabItem = this.tabHome;
             this.tabControlPanel3.Text = "Home";
+            // 
+            // lblFollowersNum
+            // 
+            this.lblFollowersNum.AutoSize = true;
+            this.lblFollowersNum.BackColor = System.Drawing.SystemColors.Window;
+            this.lblFollowersNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFollowersNum.Location = new System.Drawing.Point(645, 61);
+            this.lblFollowersNum.Name = "lblFollowersNum";
+            this.lblFollowersNum.Size = new System.Drawing.Size(14, 13);
+            this.lblFollowersNum.TabIndex = 17;
+            this.lblFollowersNum.Text = "0";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.SystemColors.Window;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(505, 61);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(64, 13);
+            this.label13.TabIndex = 16;
+            this.label13.Text = "Followers:";
             // 
             // lblViewersNumber
             // 
@@ -901,6 +923,7 @@
             // timerUpdateGUI
             // 
             this.timerUpdateGUI.Enabled = true;
+            this.timerUpdateGUI.Interval = 1000;
             this.timerUpdateGUI.Tick += new System.EventHandler(this.timerUpdateGUI_Tick);
             // 
             // btnCommands
@@ -1032,28 +1055,6 @@
             this.btnModerationSymbol.TabIndex = 10;
             this.btnModerationSymbol.Text = "Enable Moderation Symbol";
             this.btnModerationSymbol.Click += new System.EventHandler(this.btnModerationSymbol_Click);
-            // 
-            // lblFollowersNum
-            // 
-            this.lblFollowersNum.AutoSize = true;
-            this.lblFollowersNum.BackColor = System.Drawing.SystemColors.Window;
-            this.lblFollowersNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFollowersNum.Location = new System.Drawing.Point(645, 61);
-            this.lblFollowersNum.Name = "lblFollowersNum";
-            this.lblFollowersNum.Size = new System.Drawing.Size(14, 13);
-            this.lblFollowersNum.TabIndex = 17;
-            this.lblFollowersNum.Text = "0";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.SystemColors.Window;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(504, 61);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(64, 13);
-            this.label13.TabIndex = 16;
-            this.label13.Text = "Followers:";
             // 
             // MJRBot
             // 

@@ -13,6 +13,8 @@ namespace MJRBot
     class SettingsFile
     {
         private static String fileName = @"C:\MJR_Bot\" + @"\" + BotClient.getChannel(false) + @"\" + "Settings.xml";
+        private static String fileName2 = @"C:\MJR_Bot\" + @"\" + "MainSettings.xml";
+
         /// <summary>
         /// Loads the Settings File
         /// </summary>
@@ -26,18 +28,6 @@ namespace MJRBot
                     // Root.
                     writer.WriteStartDocument();
                     writer.WriteStartElement("List");
-                    writer.WriteWhitespace("\n");
-
-                    writer.WriteStartElement("Settings");
-                    writer.WriteAttributeString("SettingName", "Username");
-                    writer.WriteAttributeString("SettingValue", "");
-                    writer.WriteEndElement();
-                    writer.WriteWhitespace("\n");
-
-                    writer.WriteStartElement("Settings");
-                    writer.WriteAttributeString("SettingName", "Password");
-                    writer.WriteAttributeString("SettingValue", "");
-                    writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 
                     writer.WriteStartElement("Settings");
@@ -191,7 +181,38 @@ namespace MJRBot
             }
         }
 
-        /// <summary>
+        public static void loadMain()
+        {
+            XmlWriterSettings settings = new XmlWriterSettings();
+            if (!File.Exists(fileName2))
+            {
+                using (XmlWriter writer = XmlWriter.Create(fileName2))
+                {
+                    // Root.
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("List");
+                    writer.WriteWhitespace("\n");
+
+                    writer.WriteStartElement("Settings");
+                    writer.WriteAttributeString("SettingName", "Username");
+                    writer.WriteAttributeString("SettingValue", "");
+                    writer.WriteEndElement();
+                    writer.WriteWhitespace("\n");
+
+                    writer.WriteStartElement("Settings");
+                    writer.WriteAttributeString("SettingName", "Password");
+                    writer.WriteAttributeString("SettingValue", "");
+                    writer.WriteEndElement();
+                    writer.WriteWhitespace("\n");
+
+                    writer.WriteEndElement();
+                    writer.WriteWhitespace("\n");
+                    writer.WriteEndDocument();
+                }
+            }
+        }
+
+        /// <summary>`
         /// Get a value of a Setting from the Settings File
         /// </summary>
         /// <param name="settingName"></param>
@@ -199,7 +220,10 @@ namespace MJRBot
         public static String getSetting(String settingName)
         {
             XmlDocument xDoc = new XmlDocument();
-            xDoc.Load(fileName);
+            if (settingName.ToLower().Equals("username") || settingName.ToLower().Equals("password"))
+                xDoc.Load(fileName2);
+            else
+                xDoc.Load(fileName);
 
             XmlNodeList oXmlNodeList = xDoc.SelectNodes("//Settings");
   
@@ -221,7 +245,13 @@ namespace MJRBot
         /// <param name="value"></param>
         public static void setSetting(String settingName, String value)
         {
-            var document = XDocument.Load(fileName);
+            String loadpath = "";
+            if (settingName.ToLower().Equals("username") || settingName.ToLower().Equals("password"))
+                loadpath = fileName2;
+            else
+                loadpath = fileName;
+
+            var document = XDocument.Load(loadpath);
             var elements = from e1 in document.Elements()
                            where e1.Name == "List"
                            from e2 in e1.Elements()

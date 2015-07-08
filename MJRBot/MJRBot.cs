@@ -66,6 +66,7 @@ namespace MJRBot
 
                 PointsFile.load();
                 SettingsFile.load();
+                SettingsFile.loadMain();
                 RanksFile.load();
                 if (SettingsFile.getSetting("Username") != "" && SettingsFile.getSetting("Password") != "")
                 {

@@ -350,9 +350,26 @@ namespace MJRBot
         private void timerUpdateGUI_Tick(object sender, EventArgs e)
         {
             txtChat.Text = BotClient.getChatMessages();
-            txtUsers.Text = BotClient.getUserList();
             lblViewersNumber.Text = BotClient.onlineUsers.Count.ToString();
             lblFollowersNum.Text = Followers.followersNum.ToString();
+        }
+        private void timerUpdateUserList_Tick(object sender, EventArgs e)
+        {
+            if (BotClient.setup == true)
+            {
+                for (int i = 0; i < BotClient.onlineUsers.Count; i++)
+                {
+                    if (!txtUsers.Text.Contains(BotClient.onlineUsers[i]))
+                    {
+                        txtUsers.AppendText(BotClient.onlineUsers[i].ToString() + "\n");
+                    }
+                }
+            }
+            else
+            {
+                txtUsers.Text = BotClient.getUserList();
+                BotClient.setup = true;
+            }
         }
         private void timerAutoPoints_Tick(object sender, EventArgs e)
         {

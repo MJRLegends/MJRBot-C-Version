@@ -99,6 +99,7 @@
             this.btnModerationEmote = new DevComponents.DotNetBar.ButtonX();
             this.btnModerationLinks = new DevComponents.DotNetBar.ButtonX();
             this.btnModerationSymbol = new DevComponents.DotNetBar.ButtonX();
+            this.timerUpdateUserList = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
             this.tabControlMain.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -923,7 +924,7 @@
             // timerUpdateGUI
             // 
             this.timerUpdateGUI.Enabled = true;
-            this.timerUpdateGUI.Interval = 1000;
+            this.timerUpdateGUI.Interval = 2500;
             this.timerUpdateGUI.Tick += new System.EventHandler(this.timerUpdateGUI_Tick);
             // 
             // btnCommands
@@ -1056,6 +1057,12 @@
             this.btnModerationSymbol.Text = "Enable Moderation Symbol";
             this.btnModerationSymbol.Click += new System.EventHandler(this.btnModerationSymbol_Click);
             // 
+            // timerUpdateUserList
+            // 
+            this.timerUpdateUserList.Enabled = true;
+            this.timerUpdateUserList.Interval = 15000;
+            this.timerUpdateUserList.Tick += new System.EventHandler(this.timerUpdateUserList_Tick);
+            // 
             // MJRBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1162,6 +1169,7 @@
         private DevComponents.DotNetBar.Controls.TextBoxX txtMaxEmotes;
         private System.Windows.Forms.Label lblFollowersNum;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Timer timerUpdateUserList;
     }
 }
 

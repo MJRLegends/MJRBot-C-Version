@@ -19,6 +19,7 @@ namespace MJRBot
         private static TcpClient clientSocket;
 
         private static bool shouldStop = false;
+        public static bool setup = false;
 
         public static String channel = "";
 
@@ -28,6 +29,7 @@ namespace MJRBot
 
         public static void connectToServer(String server, int port)
         {
+            setup = false;
             try
             {
                 clientSocket = new TcpClient();
@@ -203,6 +205,7 @@ namespace MJRBot
                 }
                 onlineUsers.Add(username);
             }
+            if(setup)
             chatMessages.Add("[MJRBot Info]" + username + " has joined!");
         }
 
@@ -223,7 +226,7 @@ namespace MJRBot
         /// Returns a list of Users from the onlineUsers List Array
         /// </summary>
         /// <returns>Returns a list of Users</returns>
-        public static string getUserList()
+        public static String getUserList()
         {
             string user = "";
             for (int i = 0; i < onlineUsers.Count; i++)

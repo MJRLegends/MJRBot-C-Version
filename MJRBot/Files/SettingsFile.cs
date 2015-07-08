@@ -13,14 +13,13 @@ namespace MJRBot
     class SettingsFile
     {
         private static String fileName = @"C:\MJR_Bot\" + @"\" + BotClient.getChannel(false) + @"\" + "Settings.xml";
-        private static String fileName2 = @"C:\MJR_Bot\" + @"\" + "MainSettings.xml";
+        private static String fileName2 = @"C:\MJR_Bot\MainSettings.xml";
 
         /// <summary>
         /// Loads the Settings File
         /// </summary>
         public static void load()
         {
-            XmlWriterSettings settings = new XmlWriterSettings();
             if (!File.Exists(fileName))
             {
                 using (XmlWriter writer = XmlWriter.Create(fileName))
@@ -183,31 +182,31 @@ namespace MJRBot
 
         public static void loadMain()
         {
-            XmlWriterSettings settings = new XmlWriterSettings();
-            if (!File.Exists(fileName2))
+            String fileNameHere = @"C:\MJR_Bot\MainSettings.xml";
+            if (!File.Exists(fileNameHere))
             {
-                using (XmlWriter writer = XmlWriter.Create(fileName2))
+                using (XmlWriter writer2 = XmlWriter.Create(fileNameHere))
                 {
                     // Root.
-                    writer.WriteStartDocument();
-                    writer.WriteStartElement("List");
-                    writer.WriteWhitespace("\n");
+                    writer2.WriteStartDocument();
+                    writer2.WriteStartElement("List");
+                    writer2.WriteWhitespace("\n");
 
-                    writer.WriteStartElement("Settings");
-                    writer.WriteAttributeString("SettingName", "Username");
-                    writer.WriteAttributeString("SettingValue", "");
-                    writer.WriteEndElement();
-                    writer.WriteWhitespace("\n");
+                    writer2.WriteStartElement("Settings");
+                    writer2.WriteAttributeString("SettingName", "Username");
+                    writer2.WriteAttributeString("SettingValue", "");
+                    writer2.WriteEndElement();
+                    writer2.WriteWhitespace("\n");
 
-                    writer.WriteStartElement("Settings");
-                    writer.WriteAttributeString("SettingName", "Password");
-                    writer.WriteAttributeString("SettingValue", "");
-                    writer.WriteEndElement();
-                    writer.WriteWhitespace("\n");
+                    writer2.WriteStartElement("Settings");
+                    writer2.WriteAttributeString("SettingName", "Password");
+                    writer2.WriteAttributeString("SettingValue", "");
+                    writer2.WriteEndElement();
+                    writer2.WriteWhitespace("\n");
 
-                    writer.WriteEndElement();
-                    writer.WriteWhitespace("\n");
-                    writer.WriteEndDocument();
+                    writer2.WriteEndElement();
+                    writer2.WriteWhitespace("\n");
+                    writer2.WriteEndDocument();
                 }
             }
         }
@@ -220,7 +219,7 @@ namespace MJRBot
         public static String getSetting(String settingName)
         {
             XmlDocument xDoc = new XmlDocument();
-            if (settingName.ToLower().Equals("username") || settingName.ToLower().Equals("password"))
+            if (settingName.Equals("Username") || settingName.Equals("Password"))
                 xDoc.Load(fileName2);
             else
                 xDoc.Load(fileName);
@@ -246,7 +245,7 @@ namespace MJRBot
         public static void setSetting(String settingName, String value)
         {
             String loadpath = "";
-            if (settingName.ToLower().Equals("username") || settingName.ToLower().Equals("password"))
+            if (settingName.Equals("Username") || settingName.Equals("Password"))
                 loadpath = fileName2;
             else
                 loadpath = fileName;
@@ -263,8 +262,9 @@ namespace MJRBot
             if (element != null)
             {
                 element.SetAttributeValue("SettingValue", value);
-                document.Save(fileName);
+                document.Save(loadpath);
             }
+            document = null;
         }
     }
 }

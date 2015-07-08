@@ -485,6 +485,7 @@
             this.tabControlPanel2.Style.GradientAngle = 90;
             this.tabControlPanel2.TabIndex = 2;
             this.tabControlPanel2.TabItem = this.tabSettings;
+            this.tabControlPanel2.Enter += new System.EventHandler(this.tabControlPanel2_Enter);
             // 
             // label8
             // 
@@ -919,6 +920,7 @@
             this.tabSettings.AttachedControl = this.tabControlPanel2;
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.Text = "Settings";
+            this.tabSettings.Visible = false;
             this.tabSettings.Click += new System.EventHandler(this.tabSettings_Click);
             // 
             // timerUpdateGUI

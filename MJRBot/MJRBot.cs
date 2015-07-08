@@ -43,16 +43,6 @@ namespace MJRBot
                     return;
                 }
                 BotClient.channel = "#" + txtChannel.Text;
-                if (!Directory.Exists(@"C:\MJR_Bot\"))
-                    try
-                    {
-                        Directory.CreateDirectory(@"C:\MJR_Bot\");
-                    }
-                    catch (Exception ex)
-                    {
-                        BotClient.chatMessages.Add("Unable to create directory!");
-                        return;
-                    }
                 if (!Directory.Exists(@"C:\MJR_Bot\" + BotClient.getChannel(false) + @"\"))
                     try
                     {
@@ -88,6 +78,7 @@ namespace MJRBot
                     Followers.getFollowers();
                     btnConnect.Checked = true;
                     btnSideTab.Enabled = true;
+                    tabSettings.Visible = true;
                 }
                 else
                 {
@@ -115,24 +106,27 @@ namespace MJRBot
         {
             SettingsFile.setSetting("Username", txtUsername.Text);
             SettingsFile.setSetting("Password", txtPassword.Text);
-            SettingsFile.setSetting("AnnouncementsDelay", txtAnnouncementDelay.Text);
-            SettingsFile.setSetting("StartingPoints", txtStartPoints.Text);
-            SettingsFile.setSetting("AutoPointsDelay", txtAutoPoints.Text);
-            SettingsFile.setSetting("Announcement1", txtAnnouncement1.Text);
-            SettingsFile.setSetting("Announcement2", txtAnnouncement2.Text);
-            SettingsFile.setSetting("Announcement3", txtAnnouncement3.Text);
-            SettingsFile.setSetting("Announcement4", txtAnnouncement4.Text);
-            SettingsFile.setSetting("Announcement5", txtAnnouncement5.Text);
+            if (txtChannel.Text.Length < 1)
+            {
+                SettingsFile.setSetting("AnnouncementsDelay", txtAnnouncementDelay.Text);
+                SettingsFile.setSetting("StartingPoints", txtStartPoints.Text);
+                SettingsFile.setSetting("AutoPointsDelay", txtAutoPoints.Text);
+                SettingsFile.setSetting("Announcement1", txtAnnouncement1.Text);
+                SettingsFile.setSetting("Announcement2", txtAnnouncement2.Text);
+                SettingsFile.setSetting("Announcement3", txtAnnouncement3.Text);
+                SettingsFile.setSetting("Announcement4", txtAnnouncement4.Text);
+                SettingsFile.setSetting("Announcement5", txtAnnouncement5.Text);
 
-            SettingsFile.setSetting("MaxEmotes", txtMaxEmotes.Text);
-            SettingsFile.setSetting("MaxSymbols", txtMaxSymbols.Text);
-            SettingsFile.setSetting("LinkWarning", txtLinkMessage.Text);
-            SettingsFile.setSetting("LanguageWarning", txtLanguageMessage.Text);
-            SettingsFile.setSetting("EmoteWarning", txtEmoteMessage.Text);
-            SettingsFile.setSetting("SymbolWarning", txtSymbolMessage.Text);
+                SettingsFile.setSetting("MaxEmotes", txtMaxEmotes.Text);
+                SettingsFile.setSetting("MaxSymbols", txtMaxSymbols.Text);
+                SettingsFile.setSetting("LinkWarning", txtLinkMessage.Text);
+                SettingsFile.setSetting("LanguageWarning", txtLanguageMessage.Text);
+                SettingsFile.setSetting("EmoteWarning", txtEmoteMessage.Text);
+                SettingsFile.setSetting("SymbolWarning", txtSymbolMessage.Text);
 
-            timerAnnouncements.Interval = Convert.ToInt32(SettingsFile.getSetting("AnnouncementsDelay")) * 60000;
-            timerAutoPoints.Interval = Convert.ToInt32(SettingsFile.getSetting("AutoPointsDelay")) * 60000;
+                timerAnnouncements.Interval = Convert.ToInt32(SettingsFile.getSetting("AnnouncementsDelay")) * 60000;
+                timerAutoPoints.Interval = Convert.ToInt32(SettingsFile.getSetting("AutoPointsDelay")) * 60000;
+            }
         }
         private void btnSideTab_Click(object sender, EventArgs e)
         {
@@ -395,24 +389,7 @@ namespace MJRBot
         }
         private void tabSettings_Click(object sender, EventArgs e)
         {
-            txtUsername.Text = SettingsFile.getSetting("Username");
-            txtPassword.Text = SettingsFile.getSetting("Password");
-            txtAnnouncementDelay.Text = SettingsFile.getSetting("AnnouncementsDelay");
-            txtStartPoints.Text = SettingsFile.getSetting("StartingPoints");
-            txtAutoPoints.Text = SettingsFile.getSetting("AutoPointsDelay");
-
-            txtAnnouncement1.Text = SettingsFile.getSetting("Announcement1");
-            txtAnnouncement2.Text = SettingsFile.getSetting("Announcement2");
-            txtAnnouncement3.Text = SettingsFile.getSetting("Announcement3");
-            txtAnnouncement4.Text = SettingsFile.getSetting("Announcement4");
-            txtAnnouncement5.Text = SettingsFile.getSetting("Announcement5");
-
-            txtMaxEmotes.Text = SettingsFile.getSetting("MaxEmotes");
-            txtMaxSymbols.Text = SettingsFile.getSetting("MaxSymbols");
-            txtLanguageMessage.Text = SettingsFile.getSetting("LinkWarning");
-            txtEmoteMessage.Text = SettingsFile.getSetting("EmoteWarning");
-            txtLinkMessage.Text = SettingsFile.getSetting("LanguageWarning");
-            txtSymbolMessage.Text = SettingsFile.getSetting("SymbolWarning");
+            
         }
         private void loadSettings(){
             if(SettingsFile.getSetting("Commands").Equals("true"))
@@ -540,6 +517,58 @@ namespace MJRBot
         private void MJRBot_Load(object sender, EventArgs e)
         {
             btnSideTab.Enabled = false;
+            if (!Directory.Exists(@"C:\MJR_Bot\"))
+                try
+                {
+                    Directory.CreateDirectory(@"C:\MJR_Bot\");
+                }
+                catch (Exception ex)
+                {
+                    BotClient.chatMessages.Add("Unable to create directory!");
+                    return;
+                }
+        }
+
+        private void tabControlPanel2_Enter(object sender, EventArgs e)
+        {
+            txtUsername.Text = SettingsFile.getSetting("Username");
+            txtPassword.Text = SettingsFile.getSetting("Password");
+            if (txtChannel.Text.Length > 1)
+            {
+                txtAnnouncementDelay.Text = SettingsFile.getSetting("AnnouncementsDelay");
+                txtStartPoints.Text = SettingsFile.getSetting("StartingPoints");
+                txtAutoPoints.Text = SettingsFile.getSetting("AutoPointsDelay");
+
+                txtAnnouncement1.Text = SettingsFile.getSetting("Announcement1");
+                txtAnnouncement2.Text = SettingsFile.getSetting("Announcement2");
+                txtAnnouncement3.Text = SettingsFile.getSetting("Announcement3");
+                txtAnnouncement4.Text = SettingsFile.getSetting("Announcement4");
+                txtAnnouncement5.Text = SettingsFile.getSetting("Announcement5");
+
+                txtMaxEmotes.Text = SettingsFile.getSetting("MaxEmotes");
+                txtMaxSymbols.Text = SettingsFile.getSetting("MaxSymbols");
+                txtLanguageMessage.Text = SettingsFile.getSetting("LinkWarning");
+                txtEmoteMessage.Text = SettingsFile.getSetting("EmoteWarning");
+                txtLinkMessage.Text = SettingsFile.getSetting("LanguageWarning");
+                txtSymbolMessage.Text = SettingsFile.getSetting("SymbolWarning");
+            }
+            else
+            {
+                txtAnnouncementDelay.Text = "You are currently not in a channel!";
+                txtStartPoints.Text = "You are currently not in a channel!";
+                txtAutoPoints.Text = "You are currently not in a channel!";
+                txtAnnouncement1.Text = "You are currently not in a channel!";
+                txtAnnouncement2.Text = "You are currently not in a channel!";
+                txtAnnouncement3.Text = "You are currently not in a channel!";
+                txtAnnouncement4.Text = "You are currently not in a channel!";
+                txtAnnouncement5.Text = "You are currently not in a channel!";
+                txtMaxEmotes.Text = "You are currently not in a channel!";
+                txtMaxSymbols.Text = "You are currently not in a channel!";
+                txtLanguageMessage.Text = "You are currently not in a channel!";
+                txtEmoteMessage.Text = "You are currently not in a channel!";
+                txtLinkMessage.Text = "You are currently not in a channel!";
+                txtSymbolMessage.Text = "You are currently not in a channel!";
+            }
         }
     }
 }

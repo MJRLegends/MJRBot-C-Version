@@ -164,12 +164,7 @@ namespace MJRBot
                     DateTime nowDate = DateTime.Now;
                     BotClient.chatMessages.Add("Stream date " + date);
                     BotClient.chatMessages.Add("Now date " + nowDate);
-
-                    //date = date.ToUniversalTime();
-                    //nowDate = date.ToUniversalTime();
-                    //BotClient.chatMessages.Add("Converted date " + date);
                     TimeSpan upTime = nowDate.Subtract(date);
-
 
                     BotClient.sendChatMessage(BotClient.getChannel(false) + " has been live for " + upTime.Days + " day(s) " + upTime.Hours + " hour(s) " + upTime.Minutes + " minute(s)");
                 }
@@ -231,6 +226,26 @@ namespace MJRBot
                         }
                         else
                             BotClient.sendChatMessage("Invalid arguments! You need to enter !addcommand <NAME> <RESPONSE> <PERMISSIONLEVEL>");
+                    }
+                    else if (message.ToLower().Contains("!commandstate"))
+                    {
+                        if (args.Length == 3)
+                        {
+                            CommandsFile.setCommand(args[1].ToLower(), CommandsFile.getCommandResponse(args[1].ToLower()), args[2], CommandsFile.getCommandPermissions(args[1].ToLower()));
+                            BotClient.sendChatMessage("Command " + args[1] + " has been updated!");
+                        }
+                        else
+                            BotClient.sendChatMessage("Invalid arguments! You need to enter !commandstate <NAME> <TRUE/FALSE>");
+                    }
+                    else if (message.ToLower().Contains("!commandresponse"))
+                    {
+                        if (args.Length == 3)
+                        {
+                            CommandsFile.setCommand(args[1].ToLower(),args[2], CommandsFile.getCommandState(args[1].ToLower()),CommandsFile.getCommandPermissions(args[1].ToLower()));
+                            BotClient.sendChatMessage("Command " + args[1] + " has been updated!");
+                        }
+                        else
+                            BotClient.sendChatMessage("Invalid arguments! You need to enter !commandresponse <NAME> <RESPONSE>");
                     }
                 }
                 if (SettingsFile.getSetting("Points").Equals("true"))

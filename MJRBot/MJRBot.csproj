@@ -51,6 +51,7 @@
     <Compile Include="BotClient.cs" />
     <Compile Include="ChatModeration.cs" />
     <Compile Include="Commands.cs" />
+    <Compile Include="Files\CommandsFile.cs" />
     <Compile Include="Files\RanksFile.cs" />
     <Compile Include="Followers.cs" />
     <Compile Include="Games\FruitMachine.cs" />

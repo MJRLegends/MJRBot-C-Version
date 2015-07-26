@@ -58,6 +58,7 @@ namespace MJRBot
                 SettingsFile.load();
                 SettingsFile.loadMain();
                 RanksFile.load();
+                CommandsFile.load();
                 if (SettingsFile.getSetting("Username") != "" && SettingsFile.getSetting("Password") != "")
                 {
                     BotClient.connectToServer(txtServer.Text, Convert.ToInt32(txtPort.Text));

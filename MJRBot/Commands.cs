@@ -221,6 +221,17 @@ namespace MJRBot
                         else
                             BotClient.sendChatMessage("Invalid arguments! You need to enter !getrank <USER>");
                     }
+                    else if (message.ToLower().Contains("!addcommand"))
+                    {
+                        if (args.Length == 4)
+                        {
+                            CommandsFile.addCommand(args[1].ToLower(), args[2], "true", args[3]);
+                            if (CommandsFile.getCommandState(args[1].ToLower()) == "true")
+                                BotClient.sendChatMessage("Command " + args[1] + " has been added!");
+                        }
+                        else
+                            BotClient.sendChatMessage("Invalid arguments! You need to enter !addcommand <NAME> <RESPONSE> <PERMISSIONLEVEL>");
+                    }
                 }
                 if (SettingsFile.getSetting("Points").Equals("true"))
                 {
@@ -281,6 +292,19 @@ namespace MJRBot
                     }
                 }
             }
+            if (CommandsFile.getCommandState(args[0].Substring(1)) != "false" && CommandsFile.getCommandState(args[0].Substring(1)) != "")
+            {
+                if(CommandsFile.getCommandPermissions(args[0].Substring(1)).Equals("Mod")){
+                    if (!Viewers.moderators.Contains(user.ToLower()))
+                    {
+                        return;
+                    }
+                }
+                BotClient.sendChatMessage(CommandsFile.getCommandResponse(args[0].Substring(1)));
+            }
+
         }
-    }
+
+
+    } // End of class
 }

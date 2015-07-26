@@ -92,7 +92,7 @@ namespace MJRBot
                     string _response = socketStreamReceiver.ReadLine();
                     if (_response != null)
                     {
-                        //Console.WriteLine("> " + _response);
+                        Console.WriteLine("> " + _response);
                         parseChatLine(_response);
                     }
                     else
@@ -118,7 +118,7 @@ namespace MJRBot
                     if (socketCommands.Count > socketIndex)
                     {
                         socketStreamWriter.WriteLine(socketCommands[socketIndex]);
-                        //Console.WriteLine("< " + socketCommands[socketIndex]);
+                        Console.WriteLine("< " + socketCommands[socketIndex]);
                         socketStreamWriter.Flush();
                         socketIndex++;
                     }
@@ -169,7 +169,7 @@ namespace MJRBot
                     PointsFile.isOnList(user);
                     RanksFile.isOnList(user);
                     if (SettingsFile.getSetting("Commands").Equals("true"))
-                        Commands.onCommand(user, message.ToLower());
+                        Commands.onCommand(user, message);
                     ChatModeration.Check(message, user);
                 }
                 else if (chatLine.Contains("JOIN"))

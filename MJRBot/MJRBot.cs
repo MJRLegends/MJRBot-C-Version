@@ -357,7 +357,7 @@ namespace MJRBot
                 {
                     if (!txtUsers.Text.Contains(BotClient.onlineUsers[i]))
                     {
-                        txtUsers.AppendText(BotClient.onlineUsers[i].ToString() + "\n");
+                        txtUsers.AppendText(Environment.NewLine + BotClient.onlineUsers[i].ToString());
                     }
                 }
             }

@@ -104,6 +104,10 @@ namespace MJRBot
         public void disconnect()
         {
             btnConnect.Text = "Connect";
+            btnSideTab.Text = ">>";
+            MJRBot.ActiveForm.Width = 725;
+            btnSideTab.Checked = false;
+            selected = false;
             connected = false;
             txtChannel.ReadOnly = false;
             timerAutoPoints.Enabled = false;
@@ -113,6 +117,10 @@ namespace MJRBot
             tabSettings.Visible = false;
             txtFollowers.Text = "";
             txtModerators.Text = "";
+            Viewers.moderators.Clear();
+            Followers.followers.Clear();
+            Followers.followersNum = 0;
+            txtUsers.Text = "";
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -361,9 +369,12 @@ namespace MJRBot
             lblFollowersNum.Text = Followers.followersNum.ToString();
             lblFollowerNum2.Text = Followers.followersNum.ToString();
             lblModeratorsNum.Text = Viewers.moderators.Count.ToString();
+
+
             txtModerators.Text = "";
             foreach (String user in Viewers.moderators)
             {
+                if(user != "")
                 txtModerators.AppendText(user.ToLower() + Environment.NewLine);
             }
         }

@@ -44,6 +44,8 @@ namespace MJRBot
                 socketCommands.Add("PASS " + SettingsFile.getSetting("Password"));
                 socketCommands.Add("NICK " + SettingsFile.getSetting("Username"));
                 chatMessages.Add("[MJRBot Info]" + "Connected to Twitch!");
+                socketCommands.Add("CAP REQ :twitch.tv/commands");
+                socketCommands.Add("CAP REQ :twitch.tv/membership");
             }
             catch(Exception ex)
             {
@@ -57,6 +59,7 @@ namespace MJRBot
             try
             {
                 socketCommands.Add("JOIN " + channel);
+                socketCommands.Add("PRIVMSG "+ channel + " :/mods");
                 chatMessages.Add("[MJRBot Info]" + "Joined " + getChannel(false) + "'s channel");
             }
             catch
@@ -181,6 +184,32 @@ namespace MJRBot
                 {
                     string username = chatLine.Substring(1, chatLine.IndexOf('!') - 1);
                     delUser(username);
+                }
+                else if (chatLine.Contains("NOTICE"))
+                {
+                    String notice = chatLine;
+                    notice = notice.Substring(notice.IndexOf(":") + 2);
+                    notice += ", " + BotClient.getChannel(false);
+                    String [] mods = notice.Split(',');
+                    if (mods == null)
+                    {
+                        chatMessages.Add("[MJRBot Info]" + "There was a problem getting the moderators of this channel!");
+                        return;
+                    }
+                    if (mods.Length < 1)
+                        chatMessages.Add("[MJRBot Info]" + "This channel has no moderators!");
+                    else
+                    {
+                        chatMessages.Add("[MJRBot Info]" + "Bot has the Moderators!");
+                        foreach (String user in mods)
+                        {
+                            if (!Viewers.moderators.Contains(user.ToLower()))
+                            {
+                                Console.WriteLine("Adding " + user);
+                                Viewers.moderators.Add(user.ToLower());
+                            }
+                        }
+                    }
                 }
             }
         }

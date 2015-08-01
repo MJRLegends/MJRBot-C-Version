@@ -178,6 +178,14 @@ namespace MJRBot
                     pointsSelected = false;
 
                 }
+                if (SettingsFile.getSetting("Games").Equals("true"))
+                {
+                    btnGames.Text = "Enable Games";
+                    SettingsFile.setSetting("Games", "false");
+                    btnGames.Checked = false;
+                    gamesSelected = false;
+
+                }
                 btnCommands.Text = "Enable Commands";
                 SettingsFile.setSetting("Commands", "false");
                 btnCommands.Checked = false;
@@ -196,6 +204,13 @@ namespace MJRBot
             if (SettingsFile.getSetting("Commands").Equals("true"))
                 if (pointsSelected != false)
                 {
+                    if (SettingsFile.getSetting("Games").Equals("true"))
+                    {
+                        btnGames.Text = "Enable Games";
+                        SettingsFile.setSetting("Games", "false");
+                        btnGames.Checked = false;
+                        gamesSelected = false;
+                    }
                     btnPoints.Text = "Enable Points";
                     SettingsFile.setSetting("Points", "false");
                     btnPoints.Checked = false;

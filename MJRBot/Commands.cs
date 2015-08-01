@@ -182,6 +182,53 @@ namespace MJRBot
             }
             if (user.ToLower().Equals(BotClient.getChannel(false)) || Viewers.moderators.Contains(user.ToLower()) || user.ToLower().Equals("mjrlegends"))
             {
+                if (message.ToLower().Contains("!permit"))
+                {
+                    if (args.Length == 2)
+                    {
+                        ChatModeration.PermitedUsers = ChatModeration.PermitedUsers + args[1].ToLower() + ", ";
+                        BotClient.sendChatMessage(user + " is now permited to post a link for their next message!");
+                    }
+                    else
+                        BotClient.sendChatMessage("Invalid arguments! You need to enter !permit <USER>");
+                }
+                if (message.ToLower().Contains("!addcommand"))
+                {
+                    if (args.Length == 4)
+                    {
+                        if (args[3].ToLower().Equals("Mod".ToLower()) || args[3].ToLower().Equals("User".ToLower()))
+                        {
+                            CommandsFile.addCommand(args[1].ToLower(), args[2], "true", args[3]);
+                            if (CommandsFile.getCommandState(args[1].ToLower()) == "true")
+                                BotClient.sendChatMessage("Command " + args[1] + " has been added!");
+                        }
+                        else
+                            BotClient.sendChatMessage("Invalid Permission Level! Use Mod or User");
+                    }
+                    else
+                        BotClient.sendChatMessage("Invalid arguments! You need to enter !addcommand <NAME> <RESPONSE> <PERMISSIONLEVEL>");
+                }
+                else if (message.ToLower().Contains("!commandstate"))
+                {
+                    if (args.Length == 3)
+                    {
+                        CommandsFile.setCommand(args[1].ToLower(), CommandsFile.getCommandResponse(args[1].ToLower()), args[2], CommandsFile.getCommandPermissions(args[1].ToLower()));
+                        BotClient.sendChatMessage("Command " + args[1] + " has been updated!");
+                    }
+                    else
+                        BotClient.sendChatMessage("Invalid arguments! You need to enter !commandstate <NAME> <TRUE/FALSE>");
+                }
+                else if (message.ToLower().Contains("!commandresponse"))
+                {
+                    if (args.Length == 3)
+                    {
+                        CommandsFile.setCommand(args[1].ToLower(),args[2], CommandsFile.getCommandState(args[1].ToLower()),CommandsFile.getCommandPermissions(args[1].ToLower()));
+                        BotClient.sendChatMessage("Command " + args[1] + " has been updated!");
+                    }
+                    else
+                        BotClient.sendChatMessage("Invalid arguments! You need to enter !commandresponse <NAME> <RESPONSE>");
+                }
+
                 if (SettingsFile.getSetting("Rank").Equals("true"))
                 {
                     if (message.ToLower().Contains("!setrank"))
@@ -216,38 +263,8 @@ namespace MJRBot
                         else
                             BotClient.sendChatMessage("Invalid arguments! You need to enter !getrank <USER>");
                     }
-                    else if (message.ToLower().Contains("!addcommand"))
-                    {
-                        if (args.Length == 4)
-                        {
-                            CommandsFile.addCommand(args[1].ToLower(), args[2], "true", args[3]);
-                            if (CommandsFile.getCommandState(args[1].ToLower()) == "true")
-                                BotClient.sendChatMessage("Command " + args[1] + " has been added!");
-                        }
-                        else
-                            BotClient.sendChatMessage("Invalid arguments! You need to enter !addcommand <NAME> <RESPONSE> <PERMISSIONLEVEL>");
-                    }
-                    else if (message.ToLower().Contains("!commandstate"))
-                    {
-                        if (args.Length == 3)
-                        {
-                            CommandsFile.setCommand(args[1].ToLower(), CommandsFile.getCommandResponse(args[1].ToLower()), args[2], CommandsFile.getCommandPermissions(args[1].ToLower()));
-                            BotClient.sendChatMessage("Command " + args[1] + " has been updated!");
-                        }
-                        else
-                            BotClient.sendChatMessage("Invalid arguments! You need to enter !commandstate <NAME> <TRUE/FALSE>");
-                    }
-                    else if (message.ToLower().Contains("!commandresponse"))
-                    {
-                        if (args.Length == 3)
-                        {
-                            CommandsFile.setCommand(args[1].ToLower(),args[2], CommandsFile.getCommandState(args[1].ToLower()),CommandsFile.getCommandPermissions(args[1].ToLower()));
-                            BotClient.sendChatMessage("Command " + args[1] + " has been updated!");
-                        }
-                        else
-                            BotClient.sendChatMessage("Invalid arguments! You need to enter !commandresponse <NAME> <RESPONSE>");
-                    }
                 }
+                
                 if (SettingsFile.getSetting("Points").Equals("true"))
                 {
                     if (SettingsFile.getSetting("Games").Equals("true"))
@@ -309,12 +326,13 @@ namespace MJRBot
             }
             if (CommandsFile.getCommandState(args[0].Substring(1)) != "false" && CommandsFile.getCommandState(args[0].Substring(1)) != "")
             {
-                if(CommandsFile.getCommandPermissions(args[0].Substring(1)).Equals("Mod")){
-                    if (!Viewers.moderators.Contains(user.ToLower()))
+                if(CommandsFile.getCommandPermissions(args[0].Substring(1)).ToLower().Equals("Mod".ToLower())){
+                    if (!Viewers.moderators.Contains(user.ToLower()) && !BotClient.getChannel(false).ToLower().Equals(user.ToLower()))
                     {
                         return;
                     }
                 }
+                else if(CommandsFile.getCommandPermissions(args[0].Substring(1)).ToLower().Equals("User".ToLower()))
                 BotClient.sendChatMessage(CommandsFile.getCommandResponse(args[0].Substring(1)));
             }
 

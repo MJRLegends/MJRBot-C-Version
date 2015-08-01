@@ -36,9 +36,10 @@ namespace MJRBot
             if (Ban != true && Link != true)
                 if (SettingsFile.getSetting("SymbolChecker").Equals("true"))
                 checkSymbolSpam(message,user);
+
             if (Ban)
             {
-                if (!Viewers.moderators.Contains(user.ToLower()) && !user.ToLower().Equals(BotClient.getChannel(false)) && !RanksFile.getRank(user).ToLower().Equals("gold") && user.ToLower().Equals("mjrlegends"))
+                if (!Viewers.moderators.Contains(user.ToLower()) && !user.ToLower().Equals(BotClient.getChannel(false)) && !RanksFile.getRank(user).ToLower().Equals("gold") && !user.ToLower().Equals("mjrlegends"))
                 {
                     if (banType.Equals("Words"))
                     {
@@ -175,10 +176,10 @@ namespace MJRBot
                 {
                     Allowed = true;
                 }
-                else if (PermitedUsers.Contains(sender))
+                else if (PermitedUsers.Contains(sender.ToLower()))
                 {
                     Allowed = true;
-                    PermitedUsers = "";
+                    PermitedUsers = PermitedUsers.Replace(sender.ToLower() + ", ", "");
                 }
                 else
                 {

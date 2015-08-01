@@ -17,8 +17,8 @@ namespace MJRBot
         public static String[] ranks = { "gold", "sliver", "bronze", "none" };
 
         public static int GoldPrice = 5000;
-        public static int SliverPrice = 2500;
-        public static int BronzePrice = 1000;
+        public static int SliverPrice = 3500;
+        public static int BronzePrice = 2000;
         public static void load()
         {
             XmlWriterSettings settings = new XmlWriterSettings();

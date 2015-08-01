@@ -134,7 +134,6 @@ namespace MJRBot
 
         public static void addCommand(String name, String response, String enabled, String permission)
         {
-            MessageBox.Show(name + ", " + response + ", " + enabled + ", " + permission);
             bool Found = false;
             XDocument xmlDoc = XDocument.Load(fileName);
 
@@ -142,7 +141,6 @@ namespace MJRBot
 
             if (Found == false)
             {
-                MessageBox.Show("yes");
                 XDocument xDocument = XDocument.Load(fileName);
                 XElement root = xDocument.Element("List");
                 IEnumerable<XElement> rows = root.Descendants("Commands");

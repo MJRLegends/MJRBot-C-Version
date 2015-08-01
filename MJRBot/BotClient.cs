@@ -23,9 +23,9 @@ namespace MJRBot
 
         public static String channel = "";
 
-        private static List<string> socketCommands = new List<string>();
-        public static List<string> chatMessages = new List<string>(100);
-        public static List<string> onlineUsers = new List<string>();
+        private static List<String> socketCommands = new List<String>();
+        public static List<String> chatMessages = new List<String>(100);
+        public static List<String> onlineUsers = new List<String>();
 
         public static void connectToServer(String server, int port)
         {
@@ -187,29 +187,35 @@ namespace MJRBot
                 }
                 else if (chatLine.Contains("NOTICE"))
                 {
-                    String notice = chatLine;
-                    notice = notice.Substring(notice.IndexOf(":") + 2);
-                    notice += ", " + BotClient.getChannel(false);
-                    String [] mods = notice.Split(',');
-                    if (mods == null)
+                    if (!chatLine.Contains("There are no moderators of this room"))
                     {
-                        chatMessages.Add("[MJRBot Info]" + "There was a problem getting the moderators of this channel!");
-                        return;
-                    }
-                    if (mods.Length < 1)
-                        chatMessages.Add("[MJRBot Info]" + "This channel has no moderators!");
-                    else
-                    {
-                        chatMessages.Add("[MJRBot Info]" + "Bot has the Moderators!");
-                        foreach (String user in mods)
+                        String notice = chatLine;
+                        notice = notice.Substring(notice.IndexOf("are:") + 5);
+                        notice += ", " + BotClient.getChannel(false);
+                        notice = notice.Replace(" ", String.Empty);
+
+                        String[] mods = notice.Split(',');
+                        if (mods == null)
                         {
-                            if (!Viewers.moderators.Contains(user.ToLower()))
+                            chatMessages.Add("[MJRBot Info]" + "There was a problem getting the moderators of this channel!");
+                            return;
+                        }
+                        if (mods.Length < 1)
+                            chatMessages.Add("[MJRBot Info]" + "This channel has no moderators!");
+                        else
+                        {
+                            chatMessages.Add("[MJRBot Info]" + "Bot has the Moderators!");
+                            foreach (String user in mods)
                             {
-                                Console.WriteLine("Adding " + user);
-                                Viewers.moderators.Add(user.ToLower());
+                                if (!Viewers.moderators.Contains(user.ToLower()))
+                                {
+                                    Viewers.moderators.Add(user.ToLower());
+                                }
                             }
                         }
                     }
+                    else
+                        chatMessages.Add("[MJRBot Info]" + "There are no moderators for this channel!");
                 }
             }
         }

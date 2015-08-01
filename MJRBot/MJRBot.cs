@@ -77,9 +77,16 @@ namespace MJRBot
                     Viewers.getViewers();
                     Followers.getFollowersNum();
                     Followers.getFollowers();
+                    txtFollowers.Text = "";
+                    txtModerators.Text = "";
+                    foreach (String user in Followers.followers)
+                    {
+                        txtFollowers.AppendText(user.ToLower() + Environment.NewLine);
+                    }
                     btnConnect.Checked = true;
                     btnSideTab.Enabled = true;
                     tabSettings.Visible = true;
+                    tabIModsandFollowers.Visible = true;
                 }
                 else
                 {
@@ -102,6 +109,10 @@ namespace MJRBot
             timerAutoPoints.Enabled = false;
             btnConnect.Checked = false;
             btnSideTab.Enabled = false;
+            tabIModsandFollowers.Visible = false;
+            tabSettings.Visible = false;
+            txtFollowers.Text = "";
+            txtModerators.Text = "";
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -348,6 +359,13 @@ namespace MJRBot
             txtChat.Text = BotClient.getChatMessages();
             lblViewersNumber.Text = BotClient.onlineUsers.Count.ToString();
             lblFollowersNum.Text = Followers.followersNum.ToString();
+            lblFollowerNum2.Text = Followers.followersNum.ToString();
+            lblModeratorsNum.Text = Viewers.moderators.Count.ToString();
+            txtModerators.Text = "";
+            foreach (String user in Viewers.moderators)
+            {
+                txtModerators.AppendText(user.ToLower() + Environment.NewLine);
+            }
         }
         private void timerUpdateUserList_Tick(object sender, EventArgs e)
         {

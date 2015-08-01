@@ -10,12 +10,12 @@ namespace MJRBot
     class Followers
     {
         public static int followersNum = 0;
-        public static List<string> followers = new List<string>();
+        public static List<String> followers = new List<String>();
         public static void getFollowersNum()
         {
             String result;
             WebClient web = new WebClient();
-            System.IO.Stream stream = web.OpenRead("https://api.twitch.tv/kraken/streams/" + BotClient.getChannel(false).ToLower());
+            System.IO.Stream stream = web.OpenRead("https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower());
             using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
             {
                 result = reader.ReadToEnd();

@@ -99,7 +99,7 @@ namespace MJRBot
                     string _response = socketStreamReceiver.ReadLine();
                     if (_response != null)
                     {
-                        Console.WriteLine("> " + _response);
+                        //Console.WriteLine("> " + _response);
                         parseChatLine(_response);
                     }
                     else
@@ -125,7 +125,7 @@ namespace MJRBot
                     if (socketCommands.Count > socketIndex)
                     {
                         socketStreamWriter.WriteLine(socketCommands[socketIndex]);
-                        Console.WriteLine("< " + socketCommands[socketIndex]);
+                        //Console.WriteLine("< " + socketCommands[socketIndex]);
                         socketStreamWriter.Flush();
                         socketIndex++;
                     }

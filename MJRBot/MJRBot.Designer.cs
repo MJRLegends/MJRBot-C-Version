@@ -31,6 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.tabControlMain = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
+            this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
+            this.lblUsername = new System.Windows.Forms.Label();
+            this.txtUsername = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtPassword = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboChannel = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.label8 = new System.Windows.Forms.Label();
             this.txtLanguageMessage = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.label9 = new System.Windows.Forms.Label();
@@ -60,10 +67,6 @@
             this.txtStartPoints = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.lblAnnouncementDelay = new System.Windows.Forms.Label();
             this.txtAnnouncementDelay = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblPassword = new System.Windows.Forms.Label();
-            this.txtPassword = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblUsername = new System.Windows.Forms.Label();
-            this.txtUsername = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabSettings = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
             this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
@@ -111,6 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
             this.tabControlMain.SuspendLayout();
             this.tabControlPanel2.SuspendLayout();
+            this.panelEx1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
             this.tabControlPanel3.SuspendLayout();
             this.tabControlPanel4.SuspendLayout();
@@ -137,9 +141,9 @@
             new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 0.45F),
             new DevComponents.DotNetBar.BackgroundColorBlend(System.Drawing.Color.Empty, 1F)});
             this.tabControlMain.ColorScheme.TabItemSelectedText = System.Drawing.Color.Black;
-            this.tabControlMain.Controls.Add(this.tabControlPanel4);
             this.tabControlMain.Controls.Add(this.tabControlPanel1);
             this.tabControlMain.Controls.Add(this.tabControlPanel2);
+            this.tabControlMain.Controls.Add(this.tabControlPanel4);
             this.tabControlMain.ForeColor = System.Drawing.Color.Black;
             this.tabControlMain.Location = new System.Drawing.Point(-4, -10);
             this.tabControlMain.Name = "tabControlMain";
@@ -156,6 +160,9 @@
             // 
             // tabControlPanel2
             // 
+            this.tabControlPanel2.Controls.Add(this.panelEx1);
+            this.tabControlPanel2.Controls.Add(this.label12);
+            this.tabControlPanel2.Controls.Add(this.comboChannel);
             this.tabControlPanel2.Controls.Add(this.label8);
             this.tabControlPanel2.Controls.Add(this.txtLanguageMessage);
             this.tabControlPanel2.Controls.Add(this.label9);
@@ -185,10 +192,6 @@
             this.tabControlPanel2.Controls.Add(this.txtStartPoints);
             this.tabControlPanel2.Controls.Add(this.lblAnnouncementDelay);
             this.tabControlPanel2.Controls.Add(this.txtAnnouncementDelay);
-            this.tabControlPanel2.Controls.Add(this.lblPassword);
-            this.tabControlPanel2.Controls.Add(this.txtPassword);
-            this.tabControlPanel2.Controls.Add(this.lblUsername);
-            this.tabControlPanel2.Controls.Add(this.txtUsername);
             this.tabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlPanel2.Location = new System.Drawing.Point(0, 27);
             this.tabControlPanel2.Name = "tabControlPanel2";
@@ -202,416 +205,31 @@
             this.tabControlPanel2.Style.GradientAngle = 90;
             this.tabControlPanel2.TabIndex = 2;
             this.tabControlPanel2.TabItem = this.tabSettings;
-            this.tabControlPanel2.Enter += new System.EventHandler(this.tabControlPanel2_Enter);
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.SystemColors.Window;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(8, 439);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(122, 13);
-            this.label8.TabIndex = 39;
-            this.label8.Text = "Language Warning: ";
-            // 
-            // txtLanguageMessage
-            // 
-            this.txtLanguageMessage.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtLanguageMessage.Border.Class = "TextBoxBorder";
-            this.txtLanguageMessage.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtLanguageMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLanguageMessage.ForeColor = System.Drawing.Color.Black;
-            this.txtLanguageMessage.Location = new System.Drawing.Point(143, 435);
-            this.txtLanguageMessage.Name = "txtLanguageMessage";
-            this.txtLanguageMessage.Size = new System.Drawing.Size(388, 22);
-            this.txtLanguageMessage.TabIndex = 38;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.SystemColors.Window;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(8, 411);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(106, 13);
-            this.label9.TabIndex = 37;
-            this.label9.Text = "Symbol Warning: ";
-            // 
-            // txtSymbolMessage
-            // 
-            this.txtSymbolMessage.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtSymbolMessage.Border.Class = "TextBoxBorder";
-            this.txtSymbolMessage.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtSymbolMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSymbolMessage.ForeColor = System.Drawing.Color.Black;
-            this.txtSymbolMessage.Location = new System.Drawing.Point(143, 407);
-            this.txtSymbolMessage.Name = "txtSymbolMessage";
-            this.txtSymbolMessage.Size = new System.Drawing.Size(388, 22);
-            this.txtSymbolMessage.TabIndex = 36;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.SystemColors.Window;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(8, 383);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(101, 13);
-            this.label10.TabIndex = 35;
-            this.label10.Text = "Emote Warning: ";
-            // 
-            // txtEmoteMessage
-            // 
-            this.txtEmoteMessage.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtEmoteMessage.Border.Class = "TextBoxBorder";
-            this.txtEmoteMessage.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtEmoteMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmoteMessage.ForeColor = System.Drawing.Color.Black;
-            this.txtEmoteMessage.Location = new System.Drawing.Point(143, 379);
-            this.txtEmoteMessage.Name = "txtEmoteMessage";
-            this.txtEmoteMessage.Size = new System.Drawing.Size(388, 22);
-            this.txtEmoteMessage.TabIndex = 34;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.SystemColors.Window;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(8, 355);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(90, 13);
-            this.label11.TabIndex = 33;
-            this.label11.Text = "Link Warning: ";
-            // 
-            // txtLinkMessage
-            // 
-            this.txtLinkMessage.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtLinkMessage.Border.Class = "TextBoxBorder";
-            this.txtLinkMessage.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtLinkMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLinkMessage.ForeColor = System.Drawing.Color.Black;
-            this.txtLinkMessage.Location = new System.Drawing.Point(143, 351);
-            this.txtLinkMessage.Name = "txtLinkMessage";
-            this.txtLinkMessage.Size = new System.Drawing.Size(388, 22);
-            this.txtLinkMessage.TabIndex = 32;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.Window;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(8, 327);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(88, 13);
-            this.label6.TabIndex = 31;
-            this.label6.Text = "Max Symbols: ";
-            // 
-            // txtMaxSymbols
-            // 
-            this.txtMaxSymbols.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtMaxSymbols.Border.Class = "TextBoxBorder";
-            this.txtMaxSymbols.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtMaxSymbols.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaxSymbols.ForeColor = System.Drawing.Color.Black;
-            this.txtMaxSymbols.Location = new System.Drawing.Point(143, 323);
-            this.txtMaxSymbols.Name = "txtMaxSymbols";
-            this.txtMaxSymbols.Size = new System.Drawing.Size(155, 22);
-            this.txtMaxSymbols.TabIndex = 30;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.SystemColors.Window;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(8, 299);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 13);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Max Emotes: ";
-            // 
-            // txtMaxEmotes
-            // 
-            this.txtMaxEmotes.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtMaxEmotes.Border.Class = "TextBoxBorder";
-            this.txtMaxEmotes.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtMaxEmotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaxEmotes.ForeColor = System.Drawing.Color.Black;
-            this.txtMaxEmotes.Location = new System.Drawing.Point(143, 295);
-            this.txtMaxEmotes.Name = "txtMaxEmotes";
-            this.txtMaxEmotes.Size = new System.Drawing.Size(155, 22);
-            this.txtMaxEmotes.TabIndex = 28;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.Window;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(8, 271);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(110, 13);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "Announcement 5: ";
-            // 
-            // txtAnnouncement5
-            // 
-            this.txtAnnouncement5.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtAnnouncement5.Border.Class = "TextBoxBorder";
-            this.txtAnnouncement5.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtAnnouncement5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnnouncement5.ForeColor = System.Drawing.Color.Black;
-            this.txtAnnouncement5.Location = new System.Drawing.Point(143, 267);
-            this.txtAnnouncement5.Name = "txtAnnouncement5";
-            this.txtAnnouncement5.Size = new System.Drawing.Size(388, 22);
-            this.txtAnnouncement5.TabIndex = 26;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.SystemColors.Window;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(8, 243);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 13);
-            this.label3.TabIndex = 25;
-            this.label3.Text = "Announcement 4: ";
-            // 
-            // txtAnnouncement4
-            // 
-            this.txtAnnouncement4.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtAnnouncement4.Border.Class = "TextBoxBorder";
-            this.txtAnnouncement4.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtAnnouncement4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnnouncement4.ForeColor = System.Drawing.Color.Black;
-            this.txtAnnouncement4.Location = new System.Drawing.Point(143, 239);
-            this.txtAnnouncement4.Name = "txtAnnouncement4";
-            this.txtAnnouncement4.Size = new System.Drawing.Size(388, 22);
-            this.txtAnnouncement4.TabIndex = 24;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.Window;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(8, 215);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(110, 13);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "Announcement 3: ";
-            // 
-            // txtAnnouncement3
-            // 
-            this.txtAnnouncement3.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtAnnouncement3.Border.Class = "TextBoxBorder";
-            this.txtAnnouncement3.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtAnnouncement3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnnouncement3.ForeColor = System.Drawing.Color.Black;
-            this.txtAnnouncement3.Location = new System.Drawing.Point(143, 211);
-            this.txtAnnouncement3.Name = "txtAnnouncement3";
-            this.txtAnnouncement3.Size = new System.Drawing.Size(388, 22);
-            this.txtAnnouncement3.TabIndex = 22;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.Window;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 187);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 13);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "Announcement 2: ";
-            // 
-            // txtAnnouncement2
-            // 
-            this.txtAnnouncement2.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtAnnouncement2.Border.Class = "TextBoxBorder";
-            this.txtAnnouncement2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtAnnouncement2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnnouncement2.ForeColor = System.Drawing.Color.Black;
-            this.txtAnnouncement2.Location = new System.Drawing.Point(143, 183);
-            this.txtAnnouncement2.Name = "txtAnnouncement2";
-            this.txtAnnouncement2.Size = new System.Drawing.Size(388, 22);
-            this.txtAnnouncement2.TabIndex = 20;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.Window;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 159);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 13);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Announcement 1: ";
-            // 
-            // txtAnnouncement1
-            // 
-            this.txtAnnouncement1.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtAnnouncement1.Border.Class = "TextBoxBorder";
-            this.txtAnnouncement1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtAnnouncement1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnnouncement1.ForeColor = System.Drawing.Color.Black;
-            this.txtAnnouncement1.Location = new System.Drawing.Point(143, 155);
-            this.txtAnnouncement1.Name = "txtAnnouncement1";
-            this.txtAnnouncement1.Size = new System.Drawing.Size(388, 22);
-            this.txtAnnouncement1.TabIndex = 18;
-            // 
-            // btnSave
-            // 
-            this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnSave.Location = new System.Drawing.Point(11, 463);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(690, 24);
-            this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSave.TabIndex = 17;
-            this.btnSave.Text = "Save";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // lblAutoPointsDelay
-            // 
-            this.lblAutoPointsDelay.AutoSize = true;
-            this.lblAutoPointsDelay.BackColor = System.Drawing.SystemColors.Window;
-            this.lblAutoPointsDelay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAutoPointsDelay.Location = new System.Drawing.Point(8, 131);
-            this.lblAutoPointsDelay.Name = "lblAutoPointsDelay";
-            this.lblAutoPointsDelay.Size = new System.Drawing.Size(108, 13);
-            this.lblAutoPointsDelay.TabIndex = 16;
-            this.lblAutoPointsDelay.Text = "AutoPointsDelay: ";
-            // 
-            // txtAutoPoints
-            // 
-            this.txtAutoPoints.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtAutoPoints.Border.Class = "TextBoxBorder";
-            this.txtAutoPoints.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtAutoPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAutoPoints.ForeColor = System.Drawing.Color.Black;
-            this.txtAutoPoints.Location = new System.Drawing.Point(143, 127);
-            this.txtAutoPoints.Name = "txtAutoPoints";
-            this.txtAutoPoints.Size = new System.Drawing.Size(155, 22);
-            this.txtAutoPoints.TabIndex = 15;
-            // 
-            // lblStartingPoints
-            // 
-            this.lblStartingPoints.AutoSize = true;
-            this.lblStartingPoints.BackColor = System.Drawing.SystemColors.Window;
-            this.lblStartingPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStartingPoints.Location = new System.Drawing.Point(8, 103);
-            this.lblStartingPoints.Name = "lblStartingPoints";
-            this.lblStartingPoints.Size = new System.Drawing.Size(98, 13);
-            this.lblStartingPoints.TabIndex = 14;
-            this.lblStartingPoints.Text = "Starting Points: ";
-            // 
-            // txtStartPoints
-            // 
-            this.txtStartPoints.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtStartPoints.Border.Class = "TextBoxBorder";
-            this.txtStartPoints.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtStartPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStartPoints.ForeColor = System.Drawing.Color.Black;
-            this.txtStartPoints.Location = new System.Drawing.Point(143, 99);
-            this.txtStartPoints.Name = "txtStartPoints";
-            this.txtStartPoints.Size = new System.Drawing.Size(155, 22);
-            this.txtStartPoints.TabIndex = 13;
-            // 
-            // lblAnnouncementDelay
-            // 
-            this.lblAnnouncementDelay.AutoSize = true;
-            this.lblAnnouncementDelay.BackColor = System.Drawing.SystemColors.Window;
-            this.lblAnnouncementDelay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnnouncementDelay.Location = new System.Drawing.Point(8, 75);
-            this.lblAnnouncementDelay.Name = "lblAnnouncementDelay";
-            this.lblAnnouncementDelay.Size = new System.Drawing.Size(135, 13);
-            this.lblAnnouncementDelay.TabIndex = 12;
-            this.lblAnnouncementDelay.Text = "Announcement Delay: ";
-            // 
-            // txtAnnouncementDelay
-            // 
-            this.txtAnnouncementDelay.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtAnnouncementDelay.Border.Class = "TextBoxBorder";
-            this.txtAnnouncementDelay.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtAnnouncementDelay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnnouncementDelay.ForeColor = System.Drawing.Color.Black;
-            this.txtAnnouncementDelay.Location = new System.Drawing.Point(143, 71);
-            this.txtAnnouncementDelay.Name = "txtAnnouncementDelay";
-            this.txtAnnouncementDelay.Size = new System.Drawing.Size(155, 22);
-            this.txtAnnouncementDelay.TabIndex = 11;
-            // 
-            // lblPassword
-            // 
-            this.lblPassword.AutoSize = true;
-            this.lblPassword.BackColor = System.Drawing.SystemColors.Window;
-            this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(8, 47);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(69, 13);
-            this.lblPassword.TabIndex = 10;
-            this.lblPassword.Text = "Password: ";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtPassword.Border.Class = "TextBoxBorder";
-            this.txtPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.ForeColor = System.Drawing.Color.Black;
-            this.txtPassword.Location = new System.Drawing.Point(80, 43);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(250, 22);
-            this.txtPassword.TabIndex = 9;
+            // panelEx1
+            // 
+            this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.Controls.Add(this.lblUsername);
+            this.panelEx1.Controls.Add(this.txtUsername);
+            this.panelEx1.Controls.Add(this.txtPassword);
+            this.panelEx1.Controls.Add(this.lblPassword);
+            this.panelEx1.Location = new System.Drawing.Point(0, 4);
+            this.panelEx1.Name = "panelEx1";
+            this.panelEx1.Size = new System.Drawing.Size(712, 52);
+            this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelEx1.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.panelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelEx1.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder;
+            this.panelEx1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelEx1.Style.GradientAngle = 90;
+            this.panelEx1.TabIndex = 42;
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
             this.lblUsername.BackColor = System.Drawing.SystemColors.Window;
             this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.Location = new System.Drawing.Point(8, 19);
+            this.lblUsername.Location = new System.Drawing.Point(3, 7);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(71, 13);
             this.lblUsername.TabIndex = 8;
@@ -627,17 +245,442 @@
             this.txtUsername.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUsername.ForeColor = System.Drawing.Color.Black;
-            this.txtUsername.Location = new System.Drawing.Point(80, 15);
+            this.txtUsername.Location = new System.Drawing.Point(75, 3);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(250, 22);
             this.txtUsername.TabIndex = 7;
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtPassword.Border.Class = "TextBoxBorder";
+            this.txtPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.ForeColor = System.Drawing.Color.Black;
+            this.txtPassword.Location = new System.Drawing.Point(75, 27);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(250, 22);
+            this.txtPassword.TabIndex = 9;
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.BackColor = System.Drawing.SystemColors.Window;
+            this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Location = new System.Drawing.Point(3, 31);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(69, 13);
+            this.lblPassword.TabIndex = 10;
+            this.lblPassword.Text = "Password: ";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.SystemColors.Window;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(8, 62);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(61, 13);
+            this.label12.TabIndex = 41;
+            this.label12.Text = "Channel: ";
+            // 
+            // comboChannel
+            // 
+            this.comboChannel.DisplayMember = "Text";
+            this.comboChannel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboChannel.FormattingEnabled = true;
+            this.comboChannel.ItemHeight = 14;
+            this.comboChannel.Location = new System.Drawing.Point(71, 59);
+            this.comboChannel.Name = "comboChannel";
+            this.comboChannel.Size = new System.Drawing.Size(200, 20);
+            this.comboChannel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.comboChannel.TabIndex = 40;
+            this.comboChannel.SelectedIndexChanged += new System.EventHandler(this.comboChannel_SelectedIndexChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.SystemColors.Window;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(8, 448);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(122, 13);
+            this.label8.TabIndex = 39;
+            this.label8.Text = "Language Warning: ";
+            // 
+            // txtLanguageMessage
+            // 
+            this.txtLanguageMessage.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtLanguageMessage.Border.Class = "TextBoxBorder";
+            this.txtLanguageMessage.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtLanguageMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLanguageMessage.ForeColor = System.Drawing.Color.Black;
+            this.txtLanguageMessage.Location = new System.Drawing.Point(143, 444);
+            this.txtLanguageMessage.Name = "txtLanguageMessage";
+            this.txtLanguageMessage.Size = new System.Drawing.Size(388, 22);
+            this.txtLanguageMessage.TabIndex = 38;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.SystemColors.Window;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(8, 420);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(106, 13);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "Symbol Warning: ";
+            // 
+            // txtSymbolMessage
+            // 
+            this.txtSymbolMessage.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtSymbolMessage.Border.Class = "TextBoxBorder";
+            this.txtSymbolMessage.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtSymbolMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSymbolMessage.ForeColor = System.Drawing.Color.Black;
+            this.txtSymbolMessage.Location = new System.Drawing.Point(143, 416);
+            this.txtSymbolMessage.Name = "txtSymbolMessage";
+            this.txtSymbolMessage.Size = new System.Drawing.Size(388, 22);
+            this.txtSymbolMessage.TabIndex = 36;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.SystemColors.Window;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(8, 392);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(101, 13);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "Emote Warning: ";
+            // 
+            // txtEmoteMessage
+            // 
+            this.txtEmoteMessage.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtEmoteMessage.Border.Class = "TextBoxBorder";
+            this.txtEmoteMessage.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtEmoteMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmoteMessage.ForeColor = System.Drawing.Color.Black;
+            this.txtEmoteMessage.Location = new System.Drawing.Point(143, 388);
+            this.txtEmoteMessage.Name = "txtEmoteMessage";
+            this.txtEmoteMessage.Size = new System.Drawing.Size(388, 22);
+            this.txtEmoteMessage.TabIndex = 34;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.SystemColors.Window;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(8, 364);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(90, 13);
+            this.label11.TabIndex = 33;
+            this.label11.Text = "Link Warning: ";
+            // 
+            // txtLinkMessage
+            // 
+            this.txtLinkMessage.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtLinkMessage.Border.Class = "TextBoxBorder";
+            this.txtLinkMessage.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtLinkMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLinkMessage.ForeColor = System.Drawing.Color.Black;
+            this.txtLinkMessage.Location = new System.Drawing.Point(143, 360);
+            this.txtLinkMessage.Name = "txtLinkMessage";
+            this.txtLinkMessage.Size = new System.Drawing.Size(388, 22);
+            this.txtLinkMessage.TabIndex = 32;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.Window;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(8, 337);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(88, 13);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "Max Symbols: ";
+            // 
+            // txtMaxSymbols
+            // 
+            this.txtMaxSymbols.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtMaxSymbols.Border.Class = "TextBoxBorder";
+            this.txtMaxSymbols.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMaxSymbols.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaxSymbols.ForeColor = System.Drawing.Color.Black;
+            this.txtMaxSymbols.Location = new System.Drawing.Point(143, 333);
+            this.txtMaxSymbols.Name = "txtMaxSymbols";
+            this.txtMaxSymbols.Size = new System.Drawing.Size(155, 22);
+            this.txtMaxSymbols.TabIndex = 30;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.SystemColors.Window;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(8, 309);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(83, 13);
+            this.label7.TabIndex = 29;
+            this.label7.Text = "Max Emotes: ";
+            // 
+            // txtMaxEmotes
+            // 
+            this.txtMaxEmotes.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtMaxEmotes.Border.Class = "TextBoxBorder";
+            this.txtMaxEmotes.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMaxEmotes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaxEmotes.ForeColor = System.Drawing.Color.Black;
+            this.txtMaxEmotes.Location = new System.Drawing.Point(143, 305);
+            this.txtMaxEmotes.Name = "txtMaxEmotes";
+            this.txtMaxEmotes.Size = new System.Drawing.Size(155, 22);
+            this.txtMaxEmotes.TabIndex = 28;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Window;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(8, 281);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(110, 13);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Announcement 5: ";
+            // 
+            // txtAnnouncement5
+            // 
+            this.txtAnnouncement5.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtAnnouncement5.Border.Class = "TextBoxBorder";
+            this.txtAnnouncement5.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtAnnouncement5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAnnouncement5.ForeColor = System.Drawing.Color.Black;
+            this.txtAnnouncement5.Location = new System.Drawing.Point(143, 277);
+            this.txtAnnouncement5.Name = "txtAnnouncement5";
+            this.txtAnnouncement5.Size = new System.Drawing.Size(388, 22);
+            this.txtAnnouncement5.TabIndex = 26;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.SystemColors.Window;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(8, 253);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(110, 13);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "Announcement 4: ";
+            // 
+            // txtAnnouncement4
+            // 
+            this.txtAnnouncement4.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtAnnouncement4.Border.Class = "TextBoxBorder";
+            this.txtAnnouncement4.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtAnnouncement4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAnnouncement4.ForeColor = System.Drawing.Color.Black;
+            this.txtAnnouncement4.Location = new System.Drawing.Point(143, 249);
+            this.txtAnnouncement4.Name = "txtAnnouncement4";
+            this.txtAnnouncement4.Size = new System.Drawing.Size(388, 22);
+            this.txtAnnouncement4.TabIndex = 24;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Window;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(8, 225);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(110, 13);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Announcement 3: ";
+            // 
+            // txtAnnouncement3
+            // 
+            this.txtAnnouncement3.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtAnnouncement3.Border.Class = "TextBoxBorder";
+            this.txtAnnouncement3.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtAnnouncement3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAnnouncement3.ForeColor = System.Drawing.Color.Black;
+            this.txtAnnouncement3.Location = new System.Drawing.Point(143, 221);
+            this.txtAnnouncement3.Name = "txtAnnouncement3";
+            this.txtAnnouncement3.Size = new System.Drawing.Size(388, 22);
+            this.txtAnnouncement3.TabIndex = 22;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.Window;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(8, 197);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Announcement 2: ";
+            // 
+            // txtAnnouncement2
+            // 
+            this.txtAnnouncement2.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtAnnouncement2.Border.Class = "TextBoxBorder";
+            this.txtAnnouncement2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtAnnouncement2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAnnouncement2.ForeColor = System.Drawing.Color.Black;
+            this.txtAnnouncement2.Location = new System.Drawing.Point(143, 193);
+            this.txtAnnouncement2.Name = "txtAnnouncement2";
+            this.txtAnnouncement2.Size = new System.Drawing.Size(388, 22);
+            this.txtAnnouncement2.TabIndex = 20;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Window;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(8, 169);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 13);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Announcement 1: ";
+            // 
+            // txtAnnouncement1
+            // 
+            this.txtAnnouncement1.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtAnnouncement1.Border.Class = "TextBoxBorder";
+            this.txtAnnouncement1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtAnnouncement1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAnnouncement1.ForeColor = System.Drawing.Color.Black;
+            this.txtAnnouncement1.Location = new System.Drawing.Point(143, 165);
+            this.txtAnnouncement1.Name = "txtAnnouncement1";
+            this.txtAnnouncement1.Size = new System.Drawing.Size(388, 22);
+            this.txtAnnouncement1.TabIndex = 18;
+            // 
+            // btnSave
+            // 
+            this.btnSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnSave.Location = new System.Drawing.Point(11, 468);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(690, 20);
+            this.btnSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSave.TabIndex = 17;
+            this.btnSave.Text = "Save";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // lblAutoPointsDelay
+            // 
+            this.lblAutoPointsDelay.AutoSize = true;
+            this.lblAutoPointsDelay.BackColor = System.Drawing.SystemColors.Window;
+            this.lblAutoPointsDelay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAutoPointsDelay.Location = new System.Drawing.Point(8, 141);
+            this.lblAutoPointsDelay.Name = "lblAutoPointsDelay";
+            this.lblAutoPointsDelay.Size = new System.Drawing.Size(108, 13);
+            this.lblAutoPointsDelay.TabIndex = 16;
+            this.lblAutoPointsDelay.Text = "AutoPointsDelay: ";
+            // 
+            // txtAutoPoints
+            // 
+            this.txtAutoPoints.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtAutoPoints.Border.Class = "TextBoxBorder";
+            this.txtAutoPoints.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtAutoPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAutoPoints.ForeColor = System.Drawing.Color.Black;
+            this.txtAutoPoints.Location = new System.Drawing.Point(143, 137);
+            this.txtAutoPoints.Name = "txtAutoPoints";
+            this.txtAutoPoints.Size = new System.Drawing.Size(155, 22);
+            this.txtAutoPoints.TabIndex = 15;
+            // 
+            // lblStartingPoints
+            // 
+            this.lblStartingPoints.AutoSize = true;
+            this.lblStartingPoints.BackColor = System.Drawing.SystemColors.Window;
+            this.lblStartingPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStartingPoints.Location = new System.Drawing.Point(8, 113);
+            this.lblStartingPoints.Name = "lblStartingPoints";
+            this.lblStartingPoints.Size = new System.Drawing.Size(98, 13);
+            this.lblStartingPoints.TabIndex = 14;
+            this.lblStartingPoints.Text = "Starting Points: ";
+            // 
+            // txtStartPoints
+            // 
+            this.txtStartPoints.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtStartPoints.Border.Class = "TextBoxBorder";
+            this.txtStartPoints.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtStartPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtStartPoints.ForeColor = System.Drawing.Color.Black;
+            this.txtStartPoints.Location = new System.Drawing.Point(143, 109);
+            this.txtStartPoints.Name = "txtStartPoints";
+            this.txtStartPoints.Size = new System.Drawing.Size(155, 22);
+            this.txtStartPoints.TabIndex = 13;
+            // 
+            // lblAnnouncementDelay
+            // 
+            this.lblAnnouncementDelay.AutoSize = true;
+            this.lblAnnouncementDelay.BackColor = System.Drawing.SystemColors.Window;
+            this.lblAnnouncementDelay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAnnouncementDelay.Location = new System.Drawing.Point(8, 85);
+            this.lblAnnouncementDelay.Name = "lblAnnouncementDelay";
+            this.lblAnnouncementDelay.Size = new System.Drawing.Size(135, 13);
+            this.lblAnnouncementDelay.TabIndex = 12;
+            this.lblAnnouncementDelay.Text = "Announcement Delay: ";
+            // 
+            // txtAnnouncementDelay
+            // 
+            this.txtAnnouncementDelay.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtAnnouncementDelay.Border.Class = "TextBoxBorder";
+            this.txtAnnouncementDelay.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtAnnouncementDelay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAnnouncementDelay.ForeColor = System.Drawing.Color.Black;
+            this.txtAnnouncementDelay.Location = new System.Drawing.Point(143, 81);
+            this.txtAnnouncementDelay.Name = "txtAnnouncementDelay";
+            this.txtAnnouncementDelay.Size = new System.Drawing.Size(155, 22);
+            this.txtAnnouncementDelay.TabIndex = 11;
             // 
             // tabSettings
             // 
             this.tabSettings.AttachedControl = this.tabControlPanel2;
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.Text = "Settings";
-            this.tabSettings.Visible = false;
             this.tabSettings.Click += new System.EventHandler(this.tabSettings_Click);
             // 
             // tabControlPanel1
@@ -692,6 +735,7 @@
             this.tabControlPanel3.TabIndex = 3;
             this.tabControlPanel3.TabItem = this.tabHome;
             this.tabControlPanel3.Text = "Home";
+            this.tabControlPanel3.Enter += new System.EventHandler(this.tabControlPanel3_Enter);
             // 
             // lblFollowersNum
             // 
@@ -1212,6 +1256,8 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabControlPanel2.ResumeLayout(false);
             this.tabControlPanel2.PerformLayout();
+            this.panelEx1.ResumeLayout(false);
+            this.panelEx1.PerformLayout();
             this.tabControlPanel1.ResumeLayout(false);
             this.tabControlPanel3.ResumeLayout(false);
             this.tabControlPanel3.PerformLayout();
@@ -1302,6 +1348,9 @@
         private System.Windows.Forms.Label lblModeratorsNum;
         private System.Windows.Forms.Label label14;
         private DevComponents.DotNetBar.Controls.TextBoxX txtModerators;
+        private System.Windows.Forms.Label label12;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx comboChannel;
+        private DevComponents.DotNetBar.PanelEx panelEx1;
     }
 }
 

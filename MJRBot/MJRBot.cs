@@ -55,8 +55,8 @@ namespace MJRBot
                     }
 
                 PointsFile.load();
-                SettingsFile.load();
                 SettingsFile.loadMain();
+                SettingsFile.load();
                 RanksFile.load();
                 CommandsFile.load();
                 if (SettingsFile.getSetting("Username") != "" && SettingsFile.getSetting("Password") != "")
@@ -385,13 +385,13 @@ namespace MJRBot
             lblFollowerNum2.Text = Followers.followersNum.ToString();
             lblModeratorsNum.Text = Viewers.moderators.Count.ToString();
 
-
             txtModerators.Text = "";
-            foreach (String user in Viewers.moderators)
-            {
-                if(user != "")
-                txtModerators.AppendText(user.ToLower() + Environment.NewLine);
-            }
+            if (Viewers.moderators != null)
+                foreach (String user in Viewers.moderators)
+                {
+                    if (!user.Equals(""))
+                        txtModerators.AppendText(user.ToLower() + Environment.NewLine);
+                }
         }
         private void timerUpdateUserList_Tick(object sender, EventArgs e)
         {
@@ -434,7 +434,15 @@ namespace MJRBot
         }
         private void tabSettings_Click(object sender, EventArgs e)
         {
-            
+            comboChannel.Items.Clear();
+            comboChannel.Text = "";
+            if (connected)
+            {
+                comboChannel.Items.Add(txtChannel.Text);
+                comboChannel.Text = txtChannel.Text;
+            }
+            txtUsername.Text = SettingsFile.getSetting("Username");
+            txtPassword.Text = SettingsFile.getSetting("Password");
         }
         private void loadSettings(){
             if(SettingsFile.getSetting("Commands").Equals("true"))
@@ -574,10 +582,10 @@ namespace MJRBot
                 }
         }
 
-        private void tabControlPanel2_Enter(object sender, EventArgs e)
+        private void comboChannel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtUsername.Text = SettingsFile.getSetting("Username");
-            txtPassword.Text = SettingsFile.getSetting("Password");
+            BotClient.channel = "#" + comboChannel.Text;
+            SettingsFile.load();
             if (txtChannel.Text.Length > 1)
             {
                 txtAnnouncementDelay.Text = SettingsFile.getSetting("AnnouncementsDelay");
@@ -597,23 +605,10 @@ namespace MJRBot
                 txtLinkMessage.Text = SettingsFile.getSetting("LanguageWarning");
                 txtSymbolMessage.Text = SettingsFile.getSetting("SymbolWarning");
             }
-            else
-            {
-                txtAnnouncementDelay.Text = "You are currently not in a channel!";
-                txtStartPoints.Text = "You are currently not in a channel!";
-                txtAutoPoints.Text = "You are currently not in a channel!";
-                txtAnnouncement1.Text = "You are currently not in a channel!";
-                txtAnnouncement2.Text = "You are currently not in a channel!";
-                txtAnnouncement3.Text = "You are currently not in a channel!";
-                txtAnnouncement4.Text = "You are currently not in a channel!";
-                txtAnnouncement5.Text = "You are currently not in a channel!";
-                txtMaxEmotes.Text = "You are currently not in a channel!";
-                txtMaxSymbols.Text = "You are currently not in a channel!";
-                txtLanguageMessage.Text = "You are currently not in a channel!";
-                txtEmoteMessage.Text = "You are currently not in a channel!";
-                txtLinkMessage.Text = "You are currently not in a channel!";
-                txtSymbolMessage.Text = "You are currently not in a channel!";
-            }
+        }
+
+        private void tabControlPanel3_Enter(object sender, EventArgs e)
+        {
         }
     }
 }

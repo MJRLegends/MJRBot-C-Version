@@ -182,10 +182,9 @@ namespace MJRBot
 
         public static void loadMain()
         {
-            String fileNameHere = @"C:\MJR_Bot\MainSettings.xml";
-            if (!File.Exists(fileNameHere))
+            if (!File.Exists(fileName2))
             {
-                using (XmlWriter writer2 = XmlWriter.Create(fileNameHere))
+                using (XmlWriter writer2 = XmlWriter.Create(fileName2))
                 {
                     // Root.
                     writer2.WriteStartDocument();

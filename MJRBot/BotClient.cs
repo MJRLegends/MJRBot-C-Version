@@ -20,6 +20,7 @@ namespace MJRBot
 
         private static bool shouldStop = false;
         public static bool setup = false;
+        public static bool connected = false;
 
         public static String channel = "";
 
@@ -61,10 +62,12 @@ namespace MJRBot
                 socketCommands.Add("JOIN " + channel);
                 socketCommands.Add("PRIVMSG "+ channel + " :/mods");
                 chatMessages.Add("[MJRBot Info]" + "Joined " + getChannel(false) + "'s channel");
+                connected = true;
             }
             catch
             {
                 chatMessages.Add("Error joining that channel!");
+                connected = false;
             }
         }
 
@@ -81,6 +84,7 @@ namespace MJRBot
             catch { }
             chatMessages.Clear();
             onlineUsers.Clear();
+            connected = false;
         }
         /// <summary>
         /// To receive messages from the IRC Server 
@@ -125,7 +129,7 @@ namespace MJRBot
                         socketStreamWriter.Flush();
                         socketIndex++;
                     }
-                    Thread.Sleep(1000);
+                    Thread.Sleep(4000);
                 }
                 catch
                 {

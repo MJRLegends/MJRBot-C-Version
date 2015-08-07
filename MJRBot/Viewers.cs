@@ -41,7 +41,7 @@ namespace MJRBot
                             viewers = "," + result.Substring(result.IndexOf("viewers") + 18);
                             viewers = viewers.Substring(0, viewers.IndexOf("]"));
                         }
-                        String newviewers = mods + viewers;
+                        String newviewers = viewers;
                         if (newviewers.Length > 1)
                         {
                             newviewers = newviewers.Replace(" ", "");
@@ -57,12 +57,14 @@ namespace MJRBot
                             mods = mods.Replace("]", "");
 
                             String[] ModeratorsList;
+                            mods = mods.Substring(0, mods.Length - 1);
                             ModeratorsList = mods.Split(',');
                             foreach (String viewer in ModeratorsList)
                             {
                                 moderators.Add(viewer.ToLower());
                             }
                             String[] viewersList;
+                            newviewers = mods + newviewers;
                             viewersList = newviewers.Split(',');
                             foreach (String viewer in viewersList)
                             {

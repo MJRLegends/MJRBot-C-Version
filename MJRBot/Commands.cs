@@ -177,6 +177,11 @@ namespace MJRBot
             {
                 if (message.ToLower().Equals("!disconnect"))
                 {
+                    if (SettingsFile.getSetting("SilentJoin").Equals("true"))
+                    {
+                        BotClient.sendChatMessage(SettingsFile.getSetting("Username") + " Disconnected!");
+                        Thread.Sleep(6000);
+                    }
                     System.Environment.Exit(0);
                 }
             }

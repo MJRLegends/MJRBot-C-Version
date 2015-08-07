@@ -183,6 +183,8 @@ namespace MJRBot
                 {
                     string username = chatLine.Substring(1, chatLine.IndexOf('!') - 1);
                     addUser(username);
+                    PointsFile.isOnList(username);
+                    RanksFile.isOnList(username);
                 }
                 else if (chatLine.Contains("PART"))
                 {

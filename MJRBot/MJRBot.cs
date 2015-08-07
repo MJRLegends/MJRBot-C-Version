@@ -96,6 +96,11 @@ namespace MJRBot
             }
             else
             {
+                if (SettingsFile.getSetting("SilentJoin").Equals("true"))
+                {
+                    BotClient.sendChatMessage(SettingsFile.getSetting("Username") + " Disconnected!");
+                    Thread.Sleep(6000);
+                }
                 BotClient.disconnectFromServer();
                 disconnect();
             }
@@ -402,6 +407,15 @@ namespace MJRBot
                     if (!txtUsers.Text.Contains(BotClient.onlineUsers[i]))
                     {
                         txtUsers.AppendText(Environment.NewLine + BotClient.onlineUsers[i].ToString());
+                    }
+                }
+                String[] users = txtUsers.Text.Split('\n');
+                foreach (String user in users)
+                {
+                    Console.WriteLine(user.ToString());
+                    if (!BotClient.onlineUsers.Contains(user))
+                    {
+                        txtUsers.Text.Replace(user, string.Empty);
                     }
                 }
             }

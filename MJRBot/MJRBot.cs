@@ -42,6 +42,7 @@ namespace MJRBot
                     BotClient.chatMessages.Add("You need to enter a channel!");
                     return;
                 }
+                txtChannel.Text = txtChannel.Text.ToLower();
                 BotClient.channel = "#" + txtChannel.Text;
                 if (!Directory.Exists(@"C:\MJR_Bot\" + BotClient.getChannel(false) + @"\"))
                     try
@@ -389,7 +390,9 @@ namespace MJRBot
             lblFollowersNum.Text = Followers.followersNum.ToString();
             lblFollowerNum2.Text = Followers.followersNum.ToString();
             lblModeratorsNum.Text = Viewers.moderators.Count.ToString();
-
+        }
+        private void timerUpdateUserList_Tick(object sender, EventArgs e)
+        {
             txtModerators.Text = "";
             if (Viewers.moderators != null)
                 foreach (String user in Viewers.moderators)
@@ -397,26 +400,34 @@ namespace MJRBot
                     if (!user.Equals(""))
                         txtModerators.AppendText(user.ToLower() + Environment.NewLine);
                 }
-        }
-        private void timerUpdateUserList_Tick(object sender, EventArgs e)
-        {
-            if (BotClient.setup == true)
+            if (BotClient.setup)
             {
                 for (int i = 0; i < BotClient.onlineUsers.Count; i++)
                 {
                     if (!txtUsers.Text.Contains(BotClient.onlineUsers[i]))
                     {
-                        txtUsers.AppendText(Environment.NewLine + BotClient.onlineUsers[i].ToString());
+                        if(txtUsers.TextLength < 1)
+                            txtUsers.Text = (Environment.NewLine + BotClient.onlineUsers[i].ToString());
+                        else
+                            txtUsers.AppendText(Environment.NewLine + BotClient.onlineUsers[i].ToString());
                     }
                 }
-                String[] users = txtUsers.Text.Split('\n');
+                String[] users = txtUsers.Lines;
                 foreach (String user in users)
                 {
-                    Console.WriteLine(user.ToString());
-                    if (!BotClient.onlineUsers.Contains(user))
+                    String newUser = "";
+                    if (user.Contains('\n'))
+                        newUser = user.Substring(0, user.Length - 1);
+                    else
+                        newUser = user;
+
+                    if (newUser.Contains('\r'))
+                        return;
+                    if (!BotClient.onlineUsers.Contains(newUser))
                     {
-                        txtUsers.Text.Replace(user, string.Empty);
+                        txtUsers.Text.Replace(user.Substring(0, user.Length - 1), string.Empty);
                     }
+                    
                 }
             }
             else
@@ -424,6 +435,9 @@ namespace MJRBot
                 txtUsers.Text = BotClient.getUserList();
                 BotClient.setup = true;
             }
+            txtModerators.SelectionStart = 0;
+            txtUsers.SelectionStart = 0;
+
         }
         private void timerAutoPoints_Tick(object sender, EventArgs e)
         {

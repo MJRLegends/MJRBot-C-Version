@@ -99,7 +99,7 @@ namespace MJRBot
                     string _response = socketStreamReceiver.ReadLine();
                     if (_response != null)
                     {
-                        //Console.WriteLine("> " + _response);
+                        Console.WriteLine("> " + _response);
                         parseChatLine(_response);
                     }
                     else
@@ -125,7 +125,7 @@ namespace MJRBot
                     if (socketCommands.Count > socketIndex)
                     {
                         socketStreamWriter.WriteLine(socketCommands[socketIndex]);
-                        //Console.WriteLine("< " + socketCommands[socketIndex]);
+                        Console.WriteLine("< " + socketCommands[socketIndex]);
                         socketStreamWriter.Flush();
                         socketIndex++;
                     }
@@ -193,35 +193,45 @@ namespace MJRBot
                 }
                 else if (chatLine.Contains("NOTICE"))
                 {
-                    if (!chatLine.Contains("There are no moderators of this room"))
+                    if (chatLine.Contains("The moderators of this room are:"))
                     {
-                        String notice = chatLine;
-                        notice = notice.Substring(notice.IndexOf("are:") + 5);
-                        notice += ", " + BotClient.getChannel(false);
-                        notice = notice.Replace(" ", String.Empty);
+                        if (!chatLine.Contains("There are no moderators of this room"))
+                        {
+                            String notice = chatLine;
+                            notice = notice.Substring(notice.IndexOf("are:") + 5);
+                            notice += ", " + BotClient.getChannel(false);
+                            notice = notice.Replace(" ", String.Empty);
 
-                        String[] mods = notice.Split(',');
-                        if (mods == null)
-                        {
-                            chatMessages.Add("[MJRBot Info]" + "There was a problem getting the moderators of this channel!");
-                            return;
-                        }
-                        if (mods.Length < 1)
-                            chatMessages.Add("[MJRBot Info]" + "This channel has no moderators!");
-                        else
-                        {
-                            chatMessages.Add("[MJRBot Info]" + "Bot has the Moderators!");
-                            foreach (String user in mods)
+                            String[] mods = notice.Split(',');
+                            if (mods == null)
                             {
-                                if (!Viewers.moderators.Contains(user.ToLower()))
+                                chatMessages.Add("[MJRBot Info]" + "There was a problem getting the moderators of this channel!");
+                                return;
+                            }
+                            if (mods.Length < 1)
+                                chatMessages.Add("[MJRBot Info]" + "This channel has no moderators!");
+                            else
+                            {
+                                chatMessages.Add("[MJRBot Info]" + "Bot has the Moderators!");
+                                foreach (String user in mods)
                                 {
-                                    Viewers.moderators.Add(user.ToLower());
+                                    if (!Viewers.moderators.Contains(user.ToLower()))
+                                    {
+                                        Viewers.moderators.Add(user.ToLower());
+                                    }
                                 }
                             }
                         }
+                        else
+                            chatMessages.Add("[MJRBot Info]" + "There are no moderators for this channel!");
                     }
                     else
-                        chatMessages.Add("[MJRBot Info]" + "There are no moderators for this channel!");
+                    {
+                        String line;
+                        line = chatLine.Substring(1);
+                        line = line.Substring(line.IndexOf(':'));
+                        chatMessages.Add("[MJRBot Info]" + line);
+                    }
                 }
             }
         }

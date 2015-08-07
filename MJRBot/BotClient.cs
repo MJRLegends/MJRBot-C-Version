@@ -177,7 +177,8 @@ namespace MJRBot
                     RanksFile.isOnList(user);
                     if (SettingsFile.getSetting("Commands").Equals("true"))
                         Commands.onCommand(user, message);
-                    ChatModeration.Check(message, user);
+                    if(Viewers.moderators.Contains(SettingsFile.getSetting("Username").ToLower()))
+                        ChatModeration.Check(message, user);
                 }
                 else if (chatLine.Contains("JOIN"))
                 {

@@ -31,31 +31,31 @@ namespace MJRBot
 
                     writer.WriteStartElement("Settings");
                     writer.WriteAttributeString("SettingName", "Commands");
-                    writer.WriteAttributeString("SettingValue", "true");
+                    writer.WriteAttributeString("SettingValue", "false");
                     writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 
                     writer.WriteStartElement("Settings");
                     writer.WriteAttributeString("SettingName", "Points");
-                    writer.WriteAttributeString("SettingValue", "true");
+                    writer.WriteAttributeString("SettingValue", "false");
                     writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 
                     writer.WriteStartElement("Settings");
                     writer.WriteAttributeString("SettingName", "Games");
-                    writer.WriteAttributeString("SettingValue", "true");
+                    writer.WriteAttributeString("SettingValue", "false");
                     writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 
                     writer.WriteStartElement("Settings");
                     writer.WriteAttributeString("SettingName", "Rank");
-                    writer.WriteAttributeString("SettingValue", "true");
+                    writer.WriteAttributeString("SettingValue", "false");
                     writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 
                     writer.WriteStartElement("Settings");
                     writer.WriteAttributeString("SettingName", "Announcement");
-                    writer.WriteAttributeString("SettingValue", "true");
+                    writer.WriteAttributeString("SettingValue", "false");
                     writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 
@@ -67,25 +67,25 @@ namespace MJRBot
 
                     writer.WriteStartElement("Settings");
                     writer.WriteAttributeString("SettingName", "EmoteChecker");
-                    writer.WriteAttributeString("SettingValue", "true");
+                    writer.WriteAttributeString("SettingValue", "false");
                     writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 
                     writer.WriteStartElement("Settings");
                     writer.WriteAttributeString("SettingName", "SymbolChecker");
-                    writer.WriteAttributeString("SettingValue", "true");
+                    writer.WriteAttributeString("SettingValue", "false");
                     writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 
                     writer.WriteStartElement("Settings");
                     writer.WriteAttributeString("SettingName", "LinkChecker");
-                    writer.WriteAttributeString("SettingValue", "true");
+                    writer.WriteAttributeString("SettingValue", "false");
                     writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 
                     writer.WriteStartElement("Settings");
                     writer.WriteAttributeString("SettingName", "BadwordsChecker");
-                    writer.WriteAttributeString("SettingValue", "true");
+                    writer.WriteAttributeString("SettingValue", "false");
                     writer.WriteEndElement();
                     writer.WriteWhitespace("\n");
 

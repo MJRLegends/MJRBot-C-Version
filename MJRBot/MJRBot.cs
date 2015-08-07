@@ -400,6 +400,7 @@ namespace MJRBot
                     if (!user.Equals(""))
                         txtModerators.AppendText(user.ToLower() + Environment.NewLine);
                 }
+            txtModerators.SelectionStart = 0;
             if (BotClient.setup)
             {
                 for (int i = 0; i < BotClient.onlineUsers.Count; i++)
@@ -412,6 +413,7 @@ namespace MJRBot
                             txtUsers.AppendText(Environment.NewLine + BotClient.onlineUsers[i].ToString());
                     }
                 }
+                txtUsers.SelectionStart = 0;
                 String[] users = txtUsers.Lines;
                 foreach (String user in users)
                 {
@@ -435,9 +437,6 @@ namespace MJRBot
                 txtUsers.Text = BotClient.getUserList();
                 BotClient.setup = true;
             }
-            txtModerators.SelectionStart = 0;
-            txtUsers.SelectionStart = 0;
-
         }
         private void timerAutoPoints_Tick(object sender, EventArgs e)
         {

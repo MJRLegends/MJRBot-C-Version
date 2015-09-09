@@ -62,7 +62,7 @@ namespace MJRBot
                 CommandsFile.load();
                 if (SettingsFile.getSetting("Username") != "" && SettingsFile.getSetting("Password") != "")
                 {
-                    BotClient.connectToServer(txtServer.Text, Convert.ToInt32(txtPort.Text));
+                    BotClient.connectToServer("irc.twitch.tv", 6667);
                     BotClient.joinChannel(txtChannel.Text);
                     connected = true;
                     btnConnect.Text = "Disconnect";
@@ -88,6 +88,8 @@ namespace MJRBot
                     btnSideTab.Enabled = true;
                     tabSettings.Visible = true;
                     tabIModsandFollowers.Visible = true;
+                    txtMessage.Enabled = true;
+                    btnSendMessage.Enabled = true;
                 }
                 else
                 {
@@ -119,6 +121,8 @@ namespace MJRBot
             timerAutoPoints.Enabled = false;
             btnConnect.Checked = false;
             btnSideTab.Enabled = false;
+            txtMessage.Enabled = false;
+            btnSendMessage.Enabled = false;
             tabIModsandFollowers.Visible = false;
             tabSettings.Visible = false;
             txtFollowers.Text = "";

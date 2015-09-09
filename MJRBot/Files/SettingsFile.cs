@@ -12,7 +12,8 @@ namespace MJRBot
 {
     class SettingsFile
     {
-        private static String fileName = @"C:\MJR_Bot\" + @"\" + BotClient.getChannel(false) + @"\" + "Settings.xml";
+        public static String channel = "";
+        private static String fileName = "";
         private static String fileName2 = @"C:\MJR_Bot\MainSettings.xml";
 
         /// <summary>
@@ -20,6 +21,7 @@ namespace MJRBot
         /// </summary>
         public static void load()
         {
+            fileName = @"C:\MJR_Bot\" + channel + @"\" + "Settings.xml";
             if (!File.Exists(fileName))
             {
                 using (XmlWriter writer = XmlWriter.Create(fileName))
@@ -248,7 +250,6 @@ namespace MJRBot
                 loadpath = fileName2;
             else
                 loadpath = fileName;
-
             var document = XDocument.Load(loadpath);
             var elements = from e1 in document.Elements()
                            where e1.Name == "List"

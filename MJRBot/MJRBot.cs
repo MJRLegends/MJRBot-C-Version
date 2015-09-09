@@ -132,7 +132,7 @@ namespace MJRBot
         {
             SettingsFile.setSetting("Username", txtUsername.Text);
             SettingsFile.setSetting("Password", txtPassword.Text);
-            if (txtChannel.Text.Length < 1)
+            if (SettingsFile.channel.Length > 1)
             {
                 SettingsFile.setSetting("AnnouncementsDelay", txtAnnouncementDelay.Text);
                 SettingsFile.setSetting("StartingPoints", txtStartPoints.Text);
@@ -152,6 +152,8 @@ namespace MJRBot
 
                 timerAnnouncements.Interval = Convert.ToInt32(SettingsFile.getSetting("AnnouncementsDelay")) * 60000;
                 timerAutoPoints.Interval = Convert.ToInt32(SettingsFile.getSetting("AutoPointsDelay")) * 60000;
+                clearSettingTab(false);
+                MessageBox.Show("Settings have been updated!");
             }
         }
         private void btnSideTab_Click(object sender, EventArgs e)
@@ -401,6 +403,7 @@ namespace MJRBot
                         txtModerators.AppendText(user.ToLower() + Environment.NewLine);
                 }
             txtModerators.SelectionStart = 0;
+            txtModerators.ScrollToCaret();
             if (BotClient.setup)
             {
                 for (int i = 0; i < BotClient.onlineUsers.Count; i++)
@@ -414,6 +417,7 @@ namespace MJRBot
                     }
                 }
                 txtUsers.SelectionStart = 0;
+                txtUsers.ScrollToCaret();
                 String[] users = txtUsers.Lines;
                 foreach (String user in users)
                 {
@@ -427,7 +431,10 @@ namespace MJRBot
                         return;
                     if (!BotClient.onlineUsers.Contains(newUser))
                     {
-                        txtUsers.Text.Replace(user.Substring(0, user.Length - 1), string.Empty);
+                        if (newUser.Equals(""))
+                            return;
+                        if (txtUsers.Text.Contains(newUser))
+                            txtUsers.Text.Replace(user, string.Empty);
                     }
                     
                 }
@@ -461,15 +468,35 @@ namespace MJRBot
         }
         private void tabSettings_Click(object sender, EventArgs e)
         {
-            comboChannel.Items.Clear();
-            comboChannel.Text = "";
+            clearSettingTab(true);
             if (connected)
             {
-                comboChannel.Items.Add(txtChannel.Text);
                 comboChannel.Text = txtChannel.Text;
+                SettingsFile.load();
+                txtAnnouncementDelay.Text = SettingsFile.getSetting("AnnouncementsDelay");
+                txtStartPoints.Text = SettingsFile.getSetting("StartingPoints");
+                txtAutoPoints.Text = SettingsFile.getSetting("AutoPointsDelay");
+
+                txtAnnouncement1.Text = SettingsFile.getSetting("Announcement1");
+                txtAnnouncement2.Text = SettingsFile.getSetting("Announcement2");
+                txtAnnouncement3.Text = SettingsFile.getSetting("Announcement3");
+                txtAnnouncement4.Text = SettingsFile.getSetting("Announcement4");
+                txtAnnouncement5.Text = SettingsFile.getSetting("Announcement5");
+
+                txtMaxEmotes.Text = SettingsFile.getSetting("MaxEmotes");
+                txtMaxSymbols.Text = SettingsFile.getSetting("MaxSymbols");
+                txtLanguageMessage.Text = SettingsFile.getSetting("LinkWarning");
+                txtEmoteMessage.Text = SettingsFile.getSetting("EmoteWarning");
+                txtLinkMessage.Text = SettingsFile.getSetting("LanguageWarning");
+                txtSymbolMessage.Text = SettingsFile.getSetting("SymbolWarning");
             }
             txtUsername.Text = SettingsFile.getSetting("Username");
             txtPassword.Text = SettingsFile.getSetting("Password");
+            string[] folders = System.IO.Directory.GetDirectories(@"C:\MJR_Bot\", "*", System.IO.SearchOption.AllDirectories);
+            foreach (String folder in folders)
+            {
+                comboChannel.Items.Add(folder.ToString().Remove(0, folder.LastIndexOf('\\') + 1));
+            }
         }
         private void loadSettings(){
             if(SettingsFile.getSetting("Commands").Equals("true"))
@@ -611,10 +638,11 @@ namespace MJRBot
 
         private void comboChannel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BotClient.channel = "#" + comboChannel.Text;
-            SettingsFile.load();
-            if (txtChannel.Text.Length > 1)
+            clearSettingTab(false);
+            SettingsFile.channel = comboChannel.Text;
+            if (SettingsFile.channel.Length > 1)
             {
+                SettingsFile.load();
                 txtAnnouncementDelay.Text = SettingsFile.getSetting("AnnouncementsDelay");
                 txtStartPoints.Text = SettingsFile.getSetting("StartingPoints");
                 txtAutoPoints.Text = SettingsFile.getSetting("AutoPointsDelay");
@@ -636,6 +664,29 @@ namespace MJRBot
 
         private void tabControlPanel3_Enter(object sender, EventArgs e)
         {
+        }
+        private void clearSettingTab(bool all)
+        {
+            if (all)
+            {
+                comboChannel.Items.Clear();
+                txtUsername.Text = "";
+                txtPassword.Text = "";
+            }
+            txtAnnouncementDelay.Text = "";
+            txtStartPoints.Text = "";
+            txtAutoPoints.Text = "";
+            txtAnnouncement1.Text = "";
+            txtAnnouncement2.Text = "";
+            txtAnnouncement3.Text = "";
+            txtAnnouncement4.Text = "";
+            txtAnnouncement5.Text = "";
+            txtMaxEmotes.Text = "";
+            txtMaxSymbols.Text = "";
+            txtLanguageMessage.Text = "";
+            txtEmoteMessage.Text = "";
+            txtLinkMessage.Text = "";
+            txtSymbolMessage.Text = "";
         }
     }
 }

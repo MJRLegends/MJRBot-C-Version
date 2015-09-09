@@ -312,6 +312,8 @@ namespace MJRBot
 
         public static string getChannel(bool withHash)
         {
+            if (channel.Equals(""))
+                return "";
             if (withHash)
                 return channel;
             else

@@ -56,6 +56,7 @@ namespace MJRBot
                     }
 
                 PointsFile.load();
+                SettingsFile.channel = BotClient.getChannel(false);
                 SettingsFile.loadMain();
                 SettingsFile.load();
                 RanksFile.load();
@@ -435,10 +436,11 @@ namespace MJRBot
                         return;
                     if (!BotClient.onlineUsers.Contains(newUser))
                     {
-                        if (newUser.Equals(""))
-                            return;
-                        if (txtUsers.Text.Contains(newUser))
-                            txtUsers.Text.Replace(user, string.Empty);
+                        if (!newUser.Equals(""))
+                        {
+                            if (txtUsers.Text.Contains(newUser))
+                                txtUsers.Text.Replace(user, string.Empty);
+                        }
                     }
                     
                 }

@@ -40,20 +40,17 @@ namespace MJRBot
                 {
                     runAgain = false;
                     int number = random.Next(1, 8);
-                    Console.WriteLine("Number: " + number);
                     foreach (int car in cars)
                     {
                         if (runAgain != true)
                         {
                             if (car.Equals(number))
                             {
-                                Console.WriteLine("Yes");
                                 Good = false;
                                 runAgain = true;
                             }
                             else
                             {
-                                Console.WriteLine("No");
                                 cars[i] = number;
                                 Good = true;
                                 runAgain = false;
@@ -198,8 +195,7 @@ namespace MJRBot
             {
                 if (StartedRace)
                 {
-                    Console.WriteLine("running loop..");
-                    Thread.Sleep(4000);
+                    Thread.Sleep(60000);
                     Start();
                 }
                 Thread.Sleep(4000);

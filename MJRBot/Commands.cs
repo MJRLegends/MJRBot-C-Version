@@ -52,21 +52,28 @@ namespace MJRBot
                 {
                     if (message.ToLower().Equals("!spin"))
                     {
-                        String Answer = FruitMachine.Spin();
-                        BotClient.sendChatMessage(user + " the Fruit Machine is spinning...");
-                        int waittime = 0;
-                        while (waittime < 100)
+                        if (PointsFile.getPoints(user.ToLower()) >= 1)
                         {
-                            waittime++;
-                        }
-                        if (FruitMachine.hasWon())
-                        {
-                            BotClient.sendChatMessage(user + " " + Answer + " you have Won! " + PointsFile.AddRandomPoints(user.ToLower()) + " Points");
+                            String Answer = FruitMachine.Spin();
+                            BotClient.sendChatMessage(user + " the Fruit Machine is spinning...");
+                            int waittime = 0;
+                            while (waittime < 100)
+                            {
+                                waittime++;
+                            }
+                            if (FruitMachine.hasWon())
+                            {
+                                BotClient.sendChatMessage(user + " " + Answer + " you have Won! " + PointsFile.AddRandomPoints(user.ToLower()) + " Points");
+                            }
+                            else
+                            {
+                                BotClient.sendChatMessage(user.ToLower() + " " + Answer + " you have lost! 1 Point taken!");
+                                PointsFile.RemovePoints(user.ToLower(), 1);
+                            }
                         }
                         else
                         {
-                            BotClient.sendChatMessage(user.ToLower() + " " + Answer + " you have lost! 1 Point taken!");
-                            PointsFile.RemovePoints(user.ToLower(), 1);
+                            BotClient.sendChatMessage(user.ToLower() + " you do not have enough points to play!");
                         }
                     }
                     else if (message.ToLower().Equals("!race"))
@@ -161,7 +168,9 @@ namespace MJRBot
                     String uptime = result.Substring(result.IndexOf("updated_at") + 13);
                     uptime = uptime.Substring(0, 19);
                     DateTime date = Convert.ToDateTime(uptime);
+                    date.ToUniversalTime();
                     DateTime nowDate = DateTime.Now;
+                    nowDate.ToUniversalTime();
                     TimeSpan upTime = nowDate.Subtract(date);
 
                     BotClient.sendChatMessage(BotClient.getChannel(false) + " has been live for " + upTime.Days + " day(s) " + upTime.Hours + " hour(s) " + upTime.Minutes + " minute(s)");
@@ -197,11 +206,13 @@ namespace MJRBot
                 }
                 if (message.ToLower().Contains("!addcommand"))
                 {
-                    if (args.Length == 4)
+                    if (args.Length >= 4)
                     {
-                        if (args[3].ToLower().Equals("Mod".ToLower()) || args[3].ToLower().Equals("User".ToLower()))
+                        if (args[2].ToLower().Equals("Mod".ToLower()) || args[2].ToLower().Equals("User".ToLower()))
                         {
-                            CommandsFile.addCommand(args[1].ToLower(), args[2], "true", args[3]);
+                            String response = message.Substring(message.IndexOf(args[2]));
+                            response = response.Substring(response.IndexOf(" "));
+                            CommandsFile.addCommand(args[1].ToLower(), response, "true", args[2]);
                             if (CommandsFile.getCommandState(args[1].ToLower()) == "true")
                                 BotClient.sendChatMessage("Command " + args[1] + " has been added!");
                         }
@@ -209,7 +220,7 @@ namespace MJRBot
                             BotClient.sendChatMessage("Invalid Permission Level! Use Mod or User");
                     }
                     else
-                        BotClient.sendChatMessage("Invalid arguments! You need to enter !addcommand <NAME> <RESPONSE> <PERMISSIONLEVEL>");
+                        BotClient.sendChatMessage("Invalid arguments! You need to enter !addcommand <NAME> <PERMISSIONLEVEL> <RESPONSE>");
                 }
                 else if (message.ToLower().Contains("!commandstate"))
                 {
@@ -223,9 +234,11 @@ namespace MJRBot
                 }
                 else if (message.ToLower().Contains("!commandresponse"))
                 {
-                    if (args.Length == 3)
+                    if (args.Length >= 3)
                     {
-                        CommandsFile.setCommand(args[1].ToLower(),args[2], CommandsFile.getCommandState(args[1].ToLower()),CommandsFile.getCommandPermissions(args[1].ToLower()));
+                        String response = message.Substring(message.IndexOf(args[1]));
+                        response = response.Substring(response.IndexOf(" "));
+                        CommandsFile.setCommand(args[1].ToLower(), response, CommandsFile.getCommandState(args[1].ToLower()), CommandsFile.getCommandPermissions(args[1].ToLower()));
                         BotClient.sendChatMessage("Command " + args[1] + " has been updated!");
                     }
                     else
@@ -290,8 +303,8 @@ namespace MJRBot
                     {
                         if (args.Length == 3)
                         {
-                            PointsFile.AddPoints(args[2], Convert.ToInt32(args[1]));
-                            BotClient.sendChatMessage("Added " + Convert.ToInt32(args[1]) + " points " + "to " + args[2]);
+                            PointsFile.AddPoints(args[2].ToLower(), Convert.ToInt32(args[1]));
+                            BotClient.sendChatMessage("Added " + Convert.ToInt32(args[1]) + " points " + "to " + args[2].ToLower());
                         }
                         else
                             BotClient.sendChatMessage("Invalid arguments! You need to enter !addpoints <POINTS> <USER>");
@@ -300,8 +313,8 @@ namespace MJRBot
                     {
                         if (args.Length == 3)
                         {
-                            PointsFile.RemovePoints(args[2], Convert.ToInt32(args[1]));
-                            BotClient.sendChatMessage("Removed " + Convert.ToInt32(args[1]) + " points " + "from " + args[2]);
+                            PointsFile.RemovePoints(args[2].ToLower(), Convert.ToInt32(args[1]));
+                            BotClient.sendChatMessage("Removed " + Convert.ToInt32(args[1]) + " points " + "from " + args[2].ToLower());
                         }
                         else
                             BotClient.sendChatMessage("Invalid arguments! You need to enter !removepoints <POINTS> <USER>");
@@ -310,7 +323,7 @@ namespace MJRBot
                     {
                         if (args.Length == 3)
                         {
-                            PointsFile.setPoints(args[2], Convert.ToInt32(args[1]));
+                            PointsFile.setPoints(args[2].ToLower(), Convert.ToInt32(args[1]));
                             BotClient.sendChatMessage("Set " + args[2] + " points to " + Convert.ToInt32(args[1]) + " points");
                         }
                         else
@@ -320,7 +333,7 @@ namespace MJRBot
                     {
                         if (args.Length == 2)
                         {
-                            BotClient.sendChatMessage(args[1] + " has " + PointsFile.getPoints(args[1]) + " points");
+                            BotClient.sendChatMessage(args[1].ToLower() + " has " + PointsFile.getPoints(args[1].ToLower()) + " points");
                         }
                         else
                             BotClient.sendChatMessage("Invalid arguments! You need to enter !pointscheck <USER>");

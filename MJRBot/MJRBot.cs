@@ -56,24 +56,23 @@ namespace MJRBot
                     }
 
                 PointsFile.load();
-                SettingsFile.channel = BotClient.getChannel(false);
                 SettingsFile.loadMain();
-                SettingsFile.load();
+                SettingsFile.load(BotClient.getChannel(false));
                 RanksFile.load();
                 CommandsFile.load();
-                if (SettingsFile.getSetting("Username") != "" && SettingsFile.getSetting("Password") != "")
+                if (SettingsFile.getSetting(null, "Username") != "" && SettingsFile.getSetting(null, "Password") != "")
                 {
                     BotClient.connectToServer("irc.twitch.tv", 6667);
                     BotClient.joinChannel(txtChannel.Text);
                     connected = true;
                     btnConnect.Text = "Disconnect";
                     txtChannel.ReadOnly = true;
-                    if (SettingsFile.getSetting("SilentJoin").Equals("false"))
-                        BotClient.sendChatMessage(SettingsFile.getSetting("Username") + " Connected!");
+                    if (SettingsFile.getSetting(BotClient.getChannel(false), "SilentJoin").Equals("false"))
+                        BotClient.sendChatMessage(SettingsFile.getSetting(null, "Username") + " Connected!");
 
-                    timerAutoPoints.Interval = 60000 * Convert.ToInt32(SettingsFile.getSetting("AutoPointsDelay"));
+                    timerAutoPoints.Interval = 60000 * Convert.ToInt32(SettingsFile.getSetting(BotClient.getChannel(false), "AutoPointsDelay"));
                     timerAutoPoints.Enabled = true;
-                    timerAnnouncements.Interval = 60000 * Convert.ToInt32(SettingsFile.getSetting("AnnouncementsDelay"));
+                    timerAnnouncements.Interval = 60000 * Convert.ToInt32(SettingsFile.getSetting(BotClient.getChannel(false), "AnnouncementsDelay"));
                     timerAnnouncements.Enabled = true;
 
                     Viewers.getViewers();
@@ -100,9 +99,9 @@ namespace MJRBot
             }
             else
             {
-                if (SettingsFile.getSetting("SilentJoin").Equals("true"))
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "SilentJoin").Equals("false"))
                 {
-                    BotClient.sendChatMessage(SettingsFile.getSetting("Username") + " Disconnected!");
+                    BotClient.sendChatMessage(SettingsFile.getSetting(null, "Username") + " Disconnected!");
                     Thread.Sleep(6000);
                 }
                 BotClient.disconnectFromServer();
@@ -120,6 +119,7 @@ namespace MJRBot
             connected = false;
             txtChannel.ReadOnly = false;
             timerAutoPoints.Enabled = false;
+            timerAnnouncements.Enabled = false;
             btnConnect.Checked = false;
             btnSideTab.Enabled = false;
             txtMessage.Enabled = false;
@@ -135,28 +135,31 @@ namespace MJRBot
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            SettingsFile.setSetting("Username", txtUsername.Text);
-            SettingsFile.setSetting("Password", txtPassword.Text);
-            if (SettingsFile.channel.Length > 1)
+            SettingsFile.setSetting(null, "Username", txtUsername.Text);
+            SettingsFile.setSetting(null, "Password", txtPassword.Text);
+            if (comboChannel.Text.Length >= 1)
             {
-                SettingsFile.setSetting("AnnouncementsDelay", txtAnnouncementDelay.Text);
-                SettingsFile.setSetting("StartingPoints", txtStartPoints.Text);
-                SettingsFile.setSetting("AutoPointsDelay", txtAutoPoints.Text);
-                SettingsFile.setSetting("Announcement1", txtAnnouncement1.Text);
-                SettingsFile.setSetting("Announcement2", txtAnnouncement2.Text);
-                SettingsFile.setSetting("Announcement3", txtAnnouncement3.Text);
-                SettingsFile.setSetting("Announcement4", txtAnnouncement4.Text);
-                SettingsFile.setSetting("Announcement5", txtAnnouncement5.Text);
+                SettingsFile.setSetting(comboChannel.Text, "AnnouncementsDelay", txtAnnouncementDelay.Text);
+                SettingsFile.setSetting(comboChannel.Text, "StartingPoints", txtStartPoints.Text);
+                SettingsFile.setSetting(comboChannel.Text, "AutoPointsDelay", txtAutoPoints.Text);
+                SettingsFile.setSetting(comboChannel.Text, "Announcement1", txtAnnouncement1.Text);
+                SettingsFile.setSetting(comboChannel.Text, "Announcement2", txtAnnouncement2.Text);
+                SettingsFile.setSetting(comboChannel.Text, "Announcement3", txtAnnouncement3.Text);
+                SettingsFile.setSetting(comboChannel.Text, "Announcement4", txtAnnouncement4.Text);
+                SettingsFile.setSetting(comboChannel.Text, "Announcement5", txtAnnouncement5.Text);
 
-                SettingsFile.setSetting("MaxEmotes", txtMaxEmotes.Text);
-                SettingsFile.setSetting("MaxSymbols", txtMaxSymbols.Text);
-                SettingsFile.setSetting("LinkWarning", txtLinkMessage.Text);
-                SettingsFile.setSetting("LanguageWarning", txtLanguageMessage.Text);
-                SettingsFile.setSetting("EmoteWarning", txtEmoteMessage.Text);
-                SettingsFile.setSetting("SymbolWarning", txtSymbolMessage.Text);
+                SettingsFile.setSetting(comboChannel.Text, "MaxEmotes", txtMaxEmotes.Text);
+                SettingsFile.setSetting(comboChannel.Text, "MaxSymbols", txtMaxSymbols.Text);
+                SettingsFile.setSetting(comboChannel.Text, "LinkWarning", txtLinkMessage.Text);
+                SettingsFile.setSetting(comboChannel.Text, "LanguageWarning", txtLanguageMessage.Text);
+                SettingsFile.setSetting(comboChannel.Text, "EmoteWarning", txtEmoteMessage.Text);
+                SettingsFile.setSetting(comboChannel.Text, "SymbolWarning", txtSymbolMessage.Text);
 
-                timerAnnouncements.Interval = Convert.ToInt32(SettingsFile.getSetting("AnnouncementsDelay")) * 60000;
-                timerAutoPoints.Interval = Convert.ToInt32(SettingsFile.getSetting("AutoPointsDelay")) * 60000;
+                if (comboChannel.Text.ToLower().Equals(BotClient.getChannel(false).ToLower()))
+                {
+                    timerAnnouncements.Interval = Convert.ToInt32(SettingsFile.getSetting(comboChannel.Text, "AnnouncementsDelay")) * 60000;
+                    timerAutoPoints.Interval = Convert.ToInt32(SettingsFile.getSetting(comboChannel.Text, "AutoPointsDelay")) * 60000;
+                }
                 clearSettingTab(false);
                 MessageBox.Show("Settings have been updated!");
             }
@@ -183,77 +186,78 @@ namespace MJRBot
         {
             if (commandsSelected != false)
             {
-                if (SettingsFile.getSetting("Points").Equals("true"))
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "Points").Equals("true"))
                 {
                     btnPoints.Text = "Enable Points";
-                    SettingsFile.setSetting("Points", "false");
+                    SettingsFile.setSetting(BotClient.getChannel(false), "Points", "false");
                     btnPoints.Checked = false;
                     pointsSelected = false;
 
                 }
-                if (SettingsFile.getSetting("Games").Equals("true"))
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "Games").Equals("true"))
                 {
                     btnGames.Text = "Enable Games";
-                    SettingsFile.setSetting("Games", "false");
+                    SettingsFile.setSetting(BotClient.getChannel(false), "Games", "false");
                     btnGames.Checked = false;
                     gamesSelected = false;
 
                 }
                 btnCommands.Text = "Enable Commands";
-                SettingsFile.setSetting("Commands", "false");
+                SettingsFile.setSetting(BotClient.getChannel(false), "Commands", "false");
                 btnCommands.Checked = false;
                 commandsSelected = false;
             }
             else
             {
                 btnCommands.Text = "Disable Commands";
-                SettingsFile.setSetting("Commands", "true");
+                SettingsFile.setSetting(BotClient.getChannel(false), "Commands", "true");
                 btnCommands.Checked = true;
                 commandsSelected = true;
             }
         }
         private void btnPoints_Click(object sender, EventArgs e)
         {
-            if (SettingsFile.getSetting("Commands").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "Commands").Equals("true"))
                 if (pointsSelected != false)
                 {
-                    if (SettingsFile.getSetting("Games").Equals("true"))
+                    if (SettingsFile.getSetting(BotClient.getChannel(false), "Games").Equals("true"))
                     {
                         btnGames.Text = "Enable Games";
-                        SettingsFile.setSetting("Games", "false");
+                        SettingsFile.setSetting(BotClient.getChannel(false), "Games", "false");
                         btnGames.Checked = false;
                         gamesSelected = false;
                     }
                     btnPoints.Text = "Enable Points";
-                    SettingsFile.setSetting("Points", "false");
+                    SettingsFile.setSetting(BotClient.getChannel(false), "Points", "false");
                     btnPoints.Checked = false;
                     pointsSelected = false;
                 }
                 else
                 {
                     btnPoints.Text = "Disable Points";
-                    SettingsFile.setSetting("Points", "true");
+                    SettingsFile.setSetting(BotClient.getChannel(false), "Points", "true");
                     btnPoints.Checked = true;
                     pointsSelected = true;
+                    timerAutoPoints.Interval = 60000 * Convert.ToInt32(SettingsFile.getSetting(BotClient.getChannel(false), "AutoPointsDelay"));
                 }
             else
                 BotClient.chatMessages.Add("[MJRBot Info]" + "You need to enable commands first!");
         }
         private void btnGames_Click(object sender, EventArgs e)
         {
-            if (SettingsFile.getSetting("Commands").Equals("true"))
-                if (SettingsFile.getSetting("Points").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "Commands").Equals("true"))
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "Points").Equals("true"))
                     if (gamesSelected != false)
                     {
                         btnGames.Text = "Enable Games";
-                        SettingsFile.setSetting("Games", "false");
+                        SettingsFile.setSetting(BotClient.getChannel(false), "Games", "false");
                         btnGames.Checked = false;
                         gamesSelected = false;
                     }
                     else
                     {
                         btnGames.Text = "Disable Games";
-                        SettingsFile.setSetting("Games", "true");
+                        SettingsFile.setSetting(BotClient.getChannel(false), "Games", "true");
                         btnGames.Checked = true;
                         gamesSelected = true;
                     }
@@ -268,14 +272,14 @@ namespace MJRBot
             if (announcementSelected != false)
             {
                 btnAnnouncement.Text = "Enable Announcements";
-                SettingsFile.setSetting("Announcement", "false");
+                SettingsFile.setSetting(BotClient.getChannel(false), "Announcement", "false");
                 btnAnnouncement.Checked = false;
                 announcementSelected = false;
             }
             else
             {
                 btnAnnouncement.Text = "Disable Announcements";
-                SettingsFile.setSetting("Announcement", "true");
+                SettingsFile.setSetting(BotClient.getChannel(false), "Announcement", "true");
                 btnAnnouncement.Checked = true;
                 announcementSelected = true;
             }
@@ -285,14 +289,14 @@ namespace MJRBot
             if (rankSelected != false)
             {
                 btnRank.Text = "Enable Ranks";
-                SettingsFile.setSetting("Rank", "false");
+                SettingsFile.setSetting(BotClient.getChannel(false), "Rank", "false");
                 btnRank.Checked = false;
                 rankSelected = false;
             }
             else
             {
                 btnRank.Text = "Disable Ranks";
-                SettingsFile.setSetting("Rank", "true");
+                SettingsFile.setSetting(BotClient.getChannel(false), "Rank", "true");
                 btnRank.Checked = true;
                 rankSelected = true;
             }
@@ -302,14 +306,14 @@ namespace MJRBot
             if (wordsSelected != false)
             {
                 btnModerationWords.Text = "Enable Moderation Words";
-                SettingsFile.setSetting("BadwordsChecker", "false");
+                SettingsFile.setSetting(BotClient.getChannel(false), "BadwordsChecker", "false");
                 btnModerationWords.Checked = false;
                 wordsSelected = false;
             }
             else
             {
                 btnModerationWords.Text = "Disable Moderation Words";
-                SettingsFile.setSetting("BadwordsChecker", "true");
+                SettingsFile.setSetting(BotClient.getChannel(false), "BadwordsChecker", "true");
                 btnModerationWords.Checked = true;
                 wordsSelected = true;
             }
@@ -320,14 +324,14 @@ namespace MJRBot
             if (linksSelected != false)
             {
                 btnModerationLinks.Text = "Enable Moderation Links";
-                SettingsFile.setSetting("LinkChecker", "false");
+                SettingsFile.setSetting(BotClient.getChannel(false), "LinkChecker", "false");
                 btnModerationLinks.Checked = false;
                 linksSelected = false;
             }
             else
             {
                 btnModerationLinks.Text = "Disable Moderation Links";
-                SettingsFile.setSetting("LinkChecker", "true");
+                SettingsFile.setSetting(BotClient.getChannel(false), "LinkChecker", "true");
                 btnModerationLinks.Checked = true;
                 linksSelected = true;
             }
@@ -338,14 +342,14 @@ namespace MJRBot
             if (emotesSelected != false)
             {
                 btnModerationEmote.Text = "Enable Moderation Emotes";
-                SettingsFile.setSetting("EmoteChecker", "false");
+                SettingsFile.setSetting(BotClient.getChannel(false), "EmoteChecker", "false");
                 btnModerationEmote.Checked = false;
                 emotesSelected = false;
             }
             else
             {
                 btnModerationEmote.Text = "Disable Moderation Emotes";
-                SettingsFile.setSetting("EmoteChecker", "true");
+                SettingsFile.setSetting(BotClient.getChannel(false), "EmoteChecker", "true");
                 btnModerationEmote.Checked = true;
                 emotesSelected = true;
             }
@@ -356,14 +360,14 @@ namespace MJRBot
             if (symbolsSelected != false)
             {
                 btnModerationSymbol.Text = "Enable Moderation Symbols";
-                SettingsFile.setSetting("SymbolChecker", "false");
+                SettingsFile.setSetting(BotClient.getChannel(false), "SymbolChecker", "false");
                 btnModerationSymbol.Checked = false;
                 symbolsSelected = false;
             }
             else
             {
                 btnModerationSymbol.Text = "Disable Moderation Symbols";
-                SettingsFile.setSetting("SymbolChecker", "true");
+                SettingsFile.setSetting(BotClient.getChannel(false), "SymbolChecker", "true");
                 btnModerationSymbol.Checked = true;
                 symbolsSelected = true;
             }
@@ -373,14 +377,14 @@ namespace MJRBot
             if (slientJoinSelected != false)
             {
                 btnSlientJoin.Text = "Enable SlientJoin";
-                SettingsFile.setSetting("SilentJoin", "false");
+                SettingsFile.setSetting(BotClient.getChannel(false), "SilentJoin", "false");
                 btnSlientJoin.Checked = false;
                 slientJoinSelected = false;
             }
             else
             {
                 btnSlientJoin.Text = "Disable SlientJoin";
-                SettingsFile.setSetting("SilentJoin", "true");
+                SettingsFile.setSetting(BotClient.getChannel(false), "SilentJoin", "true");
                 btnSlientJoin.Checked = true;
                 slientJoinSelected = true;
             }
@@ -453,7 +457,7 @@ namespace MJRBot
         }
         private void timerAutoPoints_Tick(object sender, EventArgs e)
         {
-            if (SettingsFile.getSetting("Points").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "Points").Equals("true"))
             {
                 foreach (String user in BotClient.onlineUsers)
                 {
@@ -464,40 +468,41 @@ namespace MJRBot
         }
         private void timerAnnouncements_Tick(object sender, EventArgs e)
         {
-            if (SettingsFile.getSetting("Announcement").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "Announcement").Equals("true"))
             {
                 int Random = 0;
                 Random rnd = new Random();
                 Random = rnd.Next(1, 5);
-                BotClient.sendChatMessage(SettingsFile.getSetting("Announcement" + Random));
+                BotClient.sendChatMessage(SettingsFile.getSetting(BotClient.getChannel(false), "Announcement" + Random));
             }
         }
         private void tabSettings_Click(object sender, EventArgs e)
         {
+            MJRBot.ActiveForm.Width = 725;
             clearSettingTab(true);
             if (connected)
             {
                 comboChannel.Text = txtChannel.Text;
-                SettingsFile.load();
-                txtAnnouncementDelay.Text = SettingsFile.getSetting("AnnouncementsDelay");
-                txtStartPoints.Text = SettingsFile.getSetting("StartingPoints");
-                txtAutoPoints.Text = SettingsFile.getSetting("AutoPointsDelay");
+                SettingsFile.load(comboChannel.Text);
+                txtAnnouncementDelay.Text = SettingsFile.getSetting(comboChannel.Text, "AnnouncementsDelay");
+                txtStartPoints.Text = SettingsFile.getSetting(comboChannel.Text, "StartingPoints");
+                txtAutoPoints.Text = SettingsFile.getSetting(comboChannel.Text, "AutoPointsDelay");
 
-                txtAnnouncement1.Text = SettingsFile.getSetting("Announcement1");
-                txtAnnouncement2.Text = SettingsFile.getSetting("Announcement2");
-                txtAnnouncement3.Text = SettingsFile.getSetting("Announcement3");
-                txtAnnouncement4.Text = SettingsFile.getSetting("Announcement4");
-                txtAnnouncement5.Text = SettingsFile.getSetting("Announcement5");
+                txtAnnouncement1.Text = SettingsFile.getSetting(comboChannel.Text, "Announcement1");
+                txtAnnouncement2.Text = SettingsFile.getSetting(comboChannel.Text, "Announcement2");
+                txtAnnouncement3.Text = SettingsFile.getSetting(comboChannel.Text, "Announcement3");
+                txtAnnouncement4.Text = SettingsFile.getSetting(comboChannel.Text, "Announcement4");
+                txtAnnouncement5.Text = SettingsFile.getSetting(comboChannel.Text, "Announcement5");
 
-                txtMaxEmotes.Text = SettingsFile.getSetting("MaxEmotes");
-                txtMaxSymbols.Text = SettingsFile.getSetting("MaxSymbols");
-                txtLanguageMessage.Text = SettingsFile.getSetting("LinkWarning");
-                txtEmoteMessage.Text = SettingsFile.getSetting("EmoteWarning");
-                txtLinkMessage.Text = SettingsFile.getSetting("LanguageWarning");
-                txtSymbolMessage.Text = SettingsFile.getSetting("SymbolWarning");
+                txtMaxEmotes.Text = SettingsFile.getSetting(comboChannel.Text, "MaxEmotes");
+                txtMaxSymbols.Text = SettingsFile.getSetting(comboChannel.Text, "MaxSymbols");
+                txtLanguageMessage.Text = SettingsFile.getSetting(comboChannel.Text, "LanguageWarning");
+                txtEmoteMessage.Text = SettingsFile.getSetting(comboChannel.Text, "EmoteWarning");
+                txtLinkMessage.Text = SettingsFile.getSetting(comboChannel.Text, "LinkWarning");
+                txtSymbolMessage.Text = SettingsFile.getSetting(comboChannel.Text, "SymbolWarning");
             }
-            txtUsername.Text = SettingsFile.getSetting("Username");
-            txtPassword.Text = SettingsFile.getSetting("Password");
+            txtUsername.Text = SettingsFile.getSetting(null, "Username");
+            txtPassword.Text = SettingsFile.getSetting(null, "Password");
             string[] folders = System.IO.Directory.GetDirectories(@"C:\MJR_Bot\", "*", System.IO.SearchOption.AllDirectories);
             foreach (String folder in folders)
             {
@@ -505,7 +510,7 @@ namespace MJRBot
             }
         }
         private void loadSettings(){
-            if(SettingsFile.getSetting("Commands").Equals("true"))
+            if(SettingsFile.getSetting(BotClient.getChannel(false), "Commands").Equals("true"))
             {
                 btnCommands.Text = "Disable Commands";
                 btnCommands.Checked = true;
@@ -517,7 +522,7 @@ namespace MJRBot
                 btnCommands.Checked = false;
                 commandsSelected = false;
             }
-            if (SettingsFile.getSetting("Points").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "Points").Equals("true"))
             {
                 btnPoints.Text = "Disable Points";
                 btnPoints.Checked = true;
@@ -529,7 +534,7 @@ namespace MJRBot
                 btnPoints.Checked = false;
                 pointsSelected = false;
             }
-            if (SettingsFile.getSetting("Games").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "Games").Equals("true"))
             {
                 btnGames.Text = "Disable Games";
                 btnGames.Checked = true;
@@ -541,7 +546,7 @@ namespace MJRBot
                 btnGames.Checked = false;
                 gamesSelected = false;
             }
-            if (SettingsFile.getSetting("Announcement").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "Announcement").Equals("true"))
             {
                 btnAnnouncement.Text = "Disable Announcement";
                 btnAnnouncement.Checked = true;
@@ -553,7 +558,7 @@ namespace MJRBot
                 btnAnnouncement.Checked = false;
                 announcementSelected = false;
             }
-            if (SettingsFile.getSetting("Rank").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "Rank").Equals("true"))
             {
                 btnRank.Text = "Disable Ranks";
                 btnRank.Checked = true;
@@ -565,7 +570,7 @@ namespace MJRBot
                 btnRank.Checked = false;
                 rankSelected = false;
             }
-            if (SettingsFile.getSetting("SilentJoin").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "SilentJoin").Equals("true"))
             {
                 btnSlientJoin.Text = "Disable SlientJoin";
                 btnSlientJoin.Checked = true;
@@ -577,7 +582,7 @@ namespace MJRBot
                 btnSlientJoin.Checked = false;
                 slientJoinSelected = false;
             }
-            if (SettingsFile.getSetting("BadwordsChecker").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "BadwordsChecker").Equals("true"))
             {
                 btnModerationWords.Text = "Disable Moderation Words";
                 btnModerationWords.Checked = true;
@@ -589,7 +594,7 @@ namespace MJRBot
                 btnModerationWords.Checked = false;
                 wordsSelected = false;
             }
-            if (SettingsFile.getSetting("LinkChecker").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "LinkChecker").Equals("true"))
             {
                 btnModerationLinks.Text = "Disable Moderation Links";
                 btnModerationLinks.Checked = true;
@@ -601,7 +606,7 @@ namespace MJRBot
                 btnModerationLinks.Checked = false;
                 linksSelected = false;
             }
-            if (SettingsFile.getSetting("EmoteChecker").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "EmoteChecker").Equals("true"))
             {
                 btnModerationEmote.Text = "Disable Moderation Emote";
                 btnModerationEmote.Checked = true;
@@ -613,7 +618,7 @@ namespace MJRBot
                 btnModerationEmote.Checked = false;
                 emotesSelected = false;
             }
-            if (SettingsFile.getSetting("SymbolChecker").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "SymbolChecker").Equals("true"))
             {
                 btnModerationSymbol.Text = "Disable Moderation Symbol";
                 btnModerationSymbol.Checked = true;
@@ -645,26 +650,25 @@ namespace MJRBot
         private void comboChannel_SelectedIndexChanged(object sender, EventArgs e)
         {
             clearSettingTab(false);
-            SettingsFile.channel = comboChannel.Text;
-            if (SettingsFile.channel.Length > 1)
+            if (comboChannel.Text.Length > 1)
             {
-                SettingsFile.load();
-                txtAnnouncementDelay.Text = SettingsFile.getSetting("AnnouncementsDelay");
-                txtStartPoints.Text = SettingsFile.getSetting("StartingPoints");
-                txtAutoPoints.Text = SettingsFile.getSetting("AutoPointsDelay");
+                SettingsFile.load(comboChannel.Text);
+                txtAnnouncementDelay.Text = SettingsFile.getSetting(comboChannel.Text, "AnnouncementsDelay");
+                txtStartPoints.Text = SettingsFile.getSetting(comboChannel.Text, "StartingPoints");
+                txtAutoPoints.Text = SettingsFile.getSetting(comboChannel.Text, "AutoPointsDelay");
 
-                txtAnnouncement1.Text = SettingsFile.getSetting("Announcement1");
-                txtAnnouncement2.Text = SettingsFile.getSetting("Announcement2");
-                txtAnnouncement3.Text = SettingsFile.getSetting("Announcement3");
-                txtAnnouncement4.Text = SettingsFile.getSetting("Announcement4");
-                txtAnnouncement5.Text = SettingsFile.getSetting("Announcement5");
+                txtAnnouncement1.Text = SettingsFile.getSetting(comboChannel.Text, "Announcement1");
+                txtAnnouncement2.Text = SettingsFile.getSetting(comboChannel.Text, "Announcement2");
+                txtAnnouncement3.Text = SettingsFile.getSetting(comboChannel.Text, "Announcement3");
+                txtAnnouncement4.Text = SettingsFile.getSetting(comboChannel.Text, "Announcement4");
+                txtAnnouncement5.Text = SettingsFile.getSetting(comboChannel.Text, "Announcement5");
 
-                txtMaxEmotes.Text = SettingsFile.getSetting("MaxEmotes");
-                txtMaxSymbols.Text = SettingsFile.getSetting("MaxSymbols");
-                txtLanguageMessage.Text = SettingsFile.getSetting("LinkWarning");
-                txtEmoteMessage.Text = SettingsFile.getSetting("EmoteWarning");
-                txtLinkMessage.Text = SettingsFile.getSetting("LanguageWarning");
-                txtSymbolMessage.Text = SettingsFile.getSetting("SymbolWarning");
+                txtMaxEmotes.Text = SettingsFile.getSetting(comboChannel.Text, "MaxEmotes");
+                txtMaxSymbols.Text = SettingsFile.getSetting(comboChannel.Text, "MaxSymbols");
+                txtLanguageMessage.Text = SettingsFile.getSetting(comboChannel.Text, "LanguageWarning");
+                txtEmoteMessage.Text = SettingsFile.getSetting(comboChannel.Text, "EmoteWarning");
+                txtLinkMessage.Text = SettingsFile.getSetting(comboChannel.Text, "LinkWarning");
+                txtSymbolMessage.Text = SettingsFile.getSetting(comboChannel.Text, "SymbolWarning");
             }
         }
 
@@ -693,6 +697,22 @@ namespace MJRBot
             txtEmoteMessage.Text = "";
             txtLinkMessage.Text = "";
             txtSymbolMessage.Text = "";
+        }
+
+        private void tabHome_Click(object sender, EventArgs e)
+        {
+            btnSideTab.Text = ">>";
+            MJRBot.ActiveForm.Width = 725;
+            btnSideTab.Checked = false;
+            selected = false;
+        }
+
+        private void tabIModsandFollowers_Click(object sender, EventArgs e)
+        {
+            btnSideTab.Text = ">>";
+            MJRBot.ActiveForm.Width = 725;
+            btnSideTab.Checked = false;
+            selected = false;
         }
     }
 }

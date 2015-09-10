@@ -154,5 +154,16 @@ namespace MJRBot
                 xDocument.Save(fileName);
             }
         }
+
+        public static void removeCommand(String commandName){
+            XmlDocument doc = new XmlDocument();
+            doc.Load(fileName);
+            XmlNodeList nodes = doc.SelectNodes("//Commands[@CommandName='" + commandName + "']");
+            for (int i = nodes.Count - 1; i >= 0; i--)
+            {
+                nodes[i].ParentNode.RemoveChild(nodes[i]);
+            }
+            doc.Save(fileName);
+        }
     }
 }

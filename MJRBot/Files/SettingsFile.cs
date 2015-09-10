@@ -12,14 +12,13 @@ namespace MJRBot
 {
     class SettingsFile
     {
-        public static String channel = "";
         private static String fileName = "";
         private static String fileName2 = @"C:\MJR_Bot\MainSettings.xml";
 
         /// <summary>
         /// Loads the Settings File
         /// </summary>
-        public static void load()
+        public static void load(String channel)
         {
             fileName = @"C:\MJR_Bot\" + channel + @"\" + "Settings.xml";
             if (!File.Exists(fileName))
@@ -217,13 +216,17 @@ namespace MJRBot
         /// </summary>
         /// <param name="settingName"></param>
         /// <returns></returns>
-        public static String getSetting(String settingName)
+        public static String getSetting(String channel, String settingName)
         {
+            Console.WriteLine("Getting " + settingName + " from " + channel);
             XmlDocument xDoc = new XmlDocument();
             if (settingName.Equals("Username") || settingName.Equals("Password"))
                 xDoc.Load(fileName2);
             else
+            {
+                fileName = @"C:\MJR_Bot\" + channel.ToLower() + @"\" + "Settings.xml";
                 xDoc.Load(fileName);
+            }
 
             XmlNodeList oXmlNodeList = xDoc.SelectNodes("//Settings");
   
@@ -243,13 +246,16 @@ namespace MJRBot
         /// </summary>
         /// <param name="settingName"></param>
         /// <param name="value"></param>
-        public static void setSetting(String settingName, String value)
+        public static void setSetting(String channel, String settingName, String value)
         {
             String loadpath = "";
             if (settingName.Equals("Username") || settingName.Equals("Password"))
                 loadpath = fileName2;
             else
+            {
+                fileName = @"C:\MJR_Bot\" + channel.ToLower() + @"\" + "Settings.xml";
                 loadpath = fileName;
+            }
             var document = XDocument.Load(loadpath);
             var elements = from e1 in document.Elements()
                            where e1.Name == "List"

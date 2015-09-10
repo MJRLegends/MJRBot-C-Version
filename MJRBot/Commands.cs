@@ -18,11 +18,10 @@ namespace MJRBot
         public static void onCommand(String user, String message)
         {
             string[] args = message.Split(' ');
-            if (SettingsFile.getSetting("Rank").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "Rank").Equals("true"))
             {
                 if (message.ToLower().Equals("!rank"))
                 {
-                    BotClient.chatMessages.Add("yes");
                     BotClient.sendChatMessage(user + " your current rank is " + RanksFile.getRank(user));
                 }
                 if (message.ToLower().Contains("!buyrank"))
@@ -42,13 +41,13 @@ namespace MJRBot
                     }
                 }
             }
-            if (SettingsFile.getSetting("Points").Equals("true"))
+            if (SettingsFile.getSetting(BotClient.getChannel(false), "Points").Equals("true"))
             {
                 if (message.ToLower().Equals("!points"))
                 {
                     BotClient.sendChatMessage(user + " you currently have " + PointsFile.getPoints(user) + " points");
                 }
-                if (SettingsFile.getSetting("Games").Equals("true"))
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "Games").Equals("true"))
                 {
                     if (message.ToLower().Equals("!spin"))
                     {
@@ -184,9 +183,9 @@ namespace MJRBot
             {
                 if (message.ToLower().Equals("!disconnect"))
                 {
-                    if (SettingsFile.getSetting("SilentJoin").Equals("true"))
+                    if (SettingsFile.getSetting(BotClient.getChannel(false), "SilentJoin").Equals("true"))
                     {
-                        BotClient.sendChatMessage(SettingsFile.getSetting("Username") + " Disconnected!");
+                        BotClient.sendChatMessage(SettingsFile.getSetting(null, "Username") + " Disconnected!");
                         Thread.Sleep(6000);
                     }
                     System.Environment.Exit(0);
@@ -222,6 +221,16 @@ namespace MJRBot
                     else
                         BotClient.sendChatMessage("Invalid arguments! You need to enter !addcommand <NAME> <PERMISSIONLEVEL> <RESPONSE>");
                 }
+                else if (message.ToLower().Contains("!removecommand"))
+                {
+                    if (args.Length == 2)
+                    {
+                        CommandsFile.removeCommand(args[1].ToLower());
+                        BotClient.sendChatMessage("Command " + args[1] + " has been deleted!");
+                    }
+                    else
+                        BotClient.sendChatMessage("Invalid arguments! You need to enter !removecommand <NAME>");
+                }
                 else if (message.ToLower().Contains("!commandstate"))
                 {
                     if (args.Length == 3)
@@ -245,7 +254,7 @@ namespace MJRBot
                         BotClient.sendChatMessage("Invalid arguments! You need to enter !commandresponse <NAME> <RESPONSE>");
                 }
 
-                if (SettingsFile.getSetting("Rank").Equals("true"))
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "Rank").Equals("true"))
                 {
                     if (message.ToLower().Contains("!setrank"))
                     {
@@ -280,10 +289,10 @@ namespace MJRBot
                             BotClient.sendChatMessage("Invalid arguments! You need to enter !getrank <USER>");
                     }
                 }
-                
-                if (SettingsFile.getSetting("Points").Equals("true"))
+
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "Points").Equals("true"))
                 {
-                    if (SettingsFile.getSetting("Games").Equals("true"))
+                    if (SettingsFile.getSetting(BotClient.getChannel(false), "Games").Equals("true"))
                     {
                         if (message.ToLower().Equals("!maths"))
                         {

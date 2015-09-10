@@ -25,16 +25,16 @@ namespace MJRBot
         public static void Check(String message, String user){
             getEmotes();
             if (Ban != true)
-                if (SettingsFile.getSetting("BadwordsChecker").Equals("true"))
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "BadwordsChecker").Equals("true"))
                 CheckBadWords(message,user);
             if (Ban != true)
-                if (SettingsFile.getSetting("LinkChecker").Equals("true"))
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "LinkChecker").Equals("true"))
                 CheckLink(message,user);
             if (Ban != true)
-                if (SettingsFile.getSetting("EmoteChecker").Equals("true"))
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "EmoteChecker").Equals("true"))
                     checkEmoteSpam(message, user);
             if (Ban != true && Link != true)
-                if (SettingsFile.getSetting("SymbolChecker").Equals("true"))
+                if (SettingsFile.getSetting(BotClient.getChannel(false), "SymbolChecker").Equals("true"))
                 checkSymbolSpam(message,user);
 
             if (Ban)
@@ -45,7 +45,7 @@ namespace MJRBot
                     {
                         BotClient.sendChatMessage("/timeout " + user);
                         BotClient.sendChatMessage("/unban " + user);
-                        BotClient.sendChatMessage(user + " " + SettingsFile.getSetting("LanguageWarning"));
+                        BotClient.sendChatMessage(user + " " + SettingsFile.getSetting(BotClient.getChannel(false), "LanguageWarning"));
                     }
                     else if (banType.Equals("Emotes"))
                     {
@@ -53,7 +53,7 @@ namespace MJRBot
                         {
                             BotClient.sendChatMessage("/timeout " + user);
                             BotClient.sendChatMessage("/unban " + user);
-                            BotClient.sendChatMessage(user + " " + SettingsFile.getSetting("EmoteWarning"));
+                            BotClient.sendChatMessage(user + " " + SettingsFile.getSetting(BotClient.getChannel(false), "EmoteWarning"));
                         }
                     }
                     else if (banType.Equals("Links"))
@@ -62,7 +62,7 @@ namespace MJRBot
                         {
                             BotClient.sendChatMessage("/timeout " + user);
                             BotClient.sendChatMessage("/unban " + user);
-                            BotClient.sendChatMessage(user + " " + SettingsFile.getSetting("LinkWarning"));
+                            BotClient.sendChatMessage(user + " " + SettingsFile.getSetting(BotClient.getChannel(false), "LinkWarning"));
                         }
                     }
                     else if (banType.Equals("Symbols"))
@@ -71,7 +71,7 @@ namespace MJRBot
                         {
                             BotClient.sendChatMessage("/timeout " + user);
                             BotClient.sendChatMessage("/unban " + user);
-                            BotClient.sendChatMessage(user + " " + SettingsFile.getSetting("SymbolWarning"));
+                            BotClient.sendChatMessage(user + " " + SettingsFile.getSetting(BotClient.getChannel(false), "SymbolWarning"));
                         }
                     }
                     Ban = false;
@@ -112,7 +112,7 @@ namespace MJRBot
                     number++;
                 }
             }
-            if (number > Convert.ToInt32(SettingsFile.getSetting("MaxEmotes")))
+            if (number > Convert.ToInt32(SettingsFile.getSetting(BotClient.getChannel(false), "MaxEmotes")))
             {
                 Ban = true;
                 banType = "Emotes";
@@ -210,7 +210,7 @@ namespace MJRBot
                         number++;
                 }
             }
-            if (number > Convert.ToInt32(SettingsFile.getSetting("MaxSymbols")))
+            if (number > Convert.ToInt32(SettingsFile.getSetting(BotClient.getChannel(false), "MaxSymbols")))
             {
                 Ban = true;
                 banType = "Symbols";

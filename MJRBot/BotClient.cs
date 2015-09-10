@@ -42,8 +42,8 @@ namespace MJRBot
                 socketWriter = new Thread(sendMessageToServer);
                 socketWriter.Start();
                 chatMessages.Add("[MJRBot Info]" + "Connecting to Twitch!");
-                socketCommands.Add("PASS " + SettingsFile.getSetting("Password"));
-                socketCommands.Add("NICK " + SettingsFile.getSetting("Username"));
+                socketCommands.Add("PASS " + SettingsFile.getSetting(null, "Password"));
+                socketCommands.Add("NICK " + SettingsFile.getSetting(null, "Username"));
                 chatMessages.Add("[MJRBot Info]" + "Connected to Twitch!");
                 socketCommands.Add("CAP REQ :twitch.tv/commands");
                 socketCommands.Add("CAP REQ :twitch.tv/membership");
@@ -85,6 +85,7 @@ namespace MJRBot
             chatMessages.Clear();
             onlineUsers.Clear();
             connected = false;
+            channel = "";
         }
         /// <summary>
         /// To receive messages from the IRC Server 
@@ -175,9 +176,9 @@ namespace MJRBot
                     chatMessages.Add("[" + prefix + "]" + user + ": " + message);
                     PointsFile.isOnList(user);
                     RanksFile.isOnList(user);
-                    if (SettingsFile.getSetting("Commands").Equals("true"))
+                    if (SettingsFile.getSetting(getChannel(false), "Commands").Equals("true"))
                         Commands.onCommand(user, message);
-                    if(Viewers.moderators.Contains(SettingsFile.getSetting("Username").ToLower()))
+                    if (Viewers.moderators.Contains(SettingsFile.getSetting(null, "Username").ToLower()))
                         ChatModeration.Check(message, user);
                 }
                 else if (chatLine.Contains("JOIN"))

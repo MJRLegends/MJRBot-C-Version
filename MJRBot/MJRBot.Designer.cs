@@ -30,6 +30,24 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tabControlMain = new DevComponents.DotNetBar.TabControl();
+            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lblFollowersNum = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lblViewersNumber = new System.Windows.Forms.Label();
+            this.txtMessage = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblSendMessage = new System.Windows.Forms.Label();
+            this.btnSendMessage = new DevComponents.DotNetBar.ButtonX();
+            this.btnSideTab = new DevComponents.DotNetBar.ButtonX();
+            this.lblViewers = new System.Windows.Forms.Label();
+            this.lblConsole = new System.Windows.Forms.Label();
+            this.txtUsers = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.txtChat = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.lblChannel = new System.Windows.Forms.Label();
+            this.txtChannel = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.btnConnect = new DevComponents.DotNetBar.ButtonX();
+            this.tabHome = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.lblUsername = new System.Windows.Forms.Label();
@@ -68,23 +86,6 @@
             this.lblAnnouncementDelay = new System.Windows.Forms.Label();
             this.txtAnnouncementDelay = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.tabSettings = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
-            this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
-            this.lblFollowersNum = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.lblViewersNumber = new System.Windows.Forms.Label();
-            this.txtMessage = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblSendMessage = new System.Windows.Forms.Label();
-            this.btnSendMessage = new DevComponents.DotNetBar.ButtonX();
-            this.btnSideTab = new DevComponents.DotNetBar.ButtonX();
-            this.lblViewers = new System.Windows.Forms.Label();
-            this.lblConsole = new System.Windows.Forms.Label();
-            this.txtUsers = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.txtChat = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.lblChannel = new System.Windows.Forms.Label();
-            this.txtChannel = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.btnConnect = new DevComponents.DotNetBar.ButtonX();
-            this.tabHome = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel4 = new DevComponents.DotNetBar.TabControlPanel();
             this.lblFollowerNum2 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -107,13 +108,12 @@
             this.btnModerationLinks = new DevComponents.DotNetBar.ButtonX();
             this.btnModerationSymbol = new DevComponents.DotNetBar.ButtonX();
             this.timerUpdateUserList = new System.Windows.Forms.Timer(this.components);
-            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
             this.tabControlMain.SuspendLayout();
-            this.tabControlPanel2.SuspendLayout();
-            this.panelEx1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
             this.tabControlPanel3.SuspendLayout();
+            this.tabControlPanel2.SuspendLayout();
+            this.panelEx1.SuspendLayout();
             this.tabControlPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -154,6 +154,256 @@
             this.tabControlMain.Tabs.Add(this.tabIModsandFollowers);
             this.tabControlMain.Tabs.Add(this.tabSettings);
             this.tabControlMain.Text = "Moderators/Followers";
+            // 
+            // tabControlPanel1
+            // 
+            this.tabControlPanel1.Controls.Add(this.tabControlPanel3);
+            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel1.Location = new System.Drawing.Point(0, 27);
+            this.tabControlPanel1.Name = "tabControlPanel1";
+            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel1.Size = new System.Drawing.Size(712, 491);
+            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
+            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel1.Style.GradientAngle = 90;
+            this.tabControlPanel1.TabIndex = 1;
+            this.tabControlPanel1.TabItem = this.tabHome;
+            this.tabControlPanel1.Text = "Home";
+            // 
+            // tabControlPanel3
+            // 
+            this.tabControlPanel3.Controls.Add(this.label15);
+            this.tabControlPanel3.Controls.Add(this.lblFollowersNum);
+            this.tabControlPanel3.Controls.Add(this.label13);
+            this.tabControlPanel3.Controls.Add(this.lblViewersNumber);
+            this.tabControlPanel3.Controls.Add(this.txtMessage);
+            this.tabControlPanel3.Controls.Add(this.lblSendMessage);
+            this.tabControlPanel3.Controls.Add(this.btnSendMessage);
+            this.tabControlPanel3.Controls.Add(this.btnSideTab);
+            this.tabControlPanel3.Controls.Add(this.lblViewers);
+            this.tabControlPanel3.Controls.Add(this.lblConsole);
+            this.tabControlPanel3.Controls.Add(this.txtUsers);
+            this.tabControlPanel3.Controls.Add(this.txtChat);
+            this.tabControlPanel3.Controls.Add(this.lblChannel);
+            this.tabControlPanel3.Controls.Add(this.txtChannel);
+            this.tabControlPanel3.Controls.Add(this.btnConnect);
+            this.tabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel3.Location = new System.Drawing.Point(1, 1);
+            this.tabControlPanel3.Name = "tabControlPanel3";
+            this.tabControlPanel3.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel3.Size = new System.Drawing.Size(710, 489);
+            this.tabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.White;
+            this.tabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
+            this.tabControlPanel3.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
+            | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel3.Style.GradientAngle = 90;
+            this.tabControlPanel3.TabIndex = 3;
+            this.tabControlPanel3.TabItem = this.tabHome;
+            this.tabControlPanel3.Text = "Home";
+            this.tabControlPanel3.Enter += new System.EventHandler(this.tabControlPanel3_Enter);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.SystemColors.Window;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(504, 72);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(79, 13);
+            this.label15.TabIndex = 18;
+            this.label15.Text = "Viewers List:";
+            // 
+            // lblFollowersNum
+            // 
+            this.lblFollowersNum.AutoSize = true;
+            this.lblFollowersNum.BackColor = System.Drawing.SystemColors.Window;
+            this.lblFollowersNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFollowersNum.Location = new System.Drawing.Point(581, 4);
+            this.lblFollowersNum.Name = "lblFollowersNum";
+            this.lblFollowersNum.Size = new System.Drawing.Size(14, 13);
+            this.lblFollowersNum.TabIndex = 17;
+            this.lblFollowersNum.Text = "0";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.SystemColors.Window;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(511, 4);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(64, 13);
+            this.label13.TabIndex = 16;
+            this.label13.Text = "Followers:";
+            // 
+            // lblViewersNumber
+            // 
+            this.lblViewersNumber.AutoSize = true;
+            this.lblViewersNumber.BackColor = System.Drawing.SystemColors.Window;
+            this.lblViewersNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblViewersNumber.Location = new System.Drawing.Point(581, 22);
+            this.lblViewersNumber.Name = "lblViewersNumber";
+            this.lblViewersNumber.Size = new System.Drawing.Size(14, 13);
+            this.lblViewersNumber.TabIndex = 15;
+            this.lblViewersNumber.Text = "0";
+            // 
+            // txtMessage
+            // 
+            this.txtMessage.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtMessage.Border.Class = "TextBoxBorder";
+            this.txtMessage.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMessage.Enabled = false;
+            this.txtMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMessage.ForeColor = System.Drawing.Color.Black;
+            this.txtMessage.Location = new System.Drawing.Point(97, 38);
+            this.txtMessage.Name = "txtMessage";
+            this.txtMessage.Size = new System.Drawing.Size(317, 22);
+            this.txtMessage.TabIndex = 14;
+            // 
+            // lblSendMessage
+            // 
+            this.lblSendMessage.AutoSize = true;
+            this.lblSendMessage.BackColor = System.Drawing.SystemColors.Window;
+            this.lblSendMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSendMessage.Location = new System.Drawing.Point(0, 42);
+            this.lblSendMessage.Name = "lblSendMessage";
+            this.lblSendMessage.Size = new System.Drawing.Size(94, 13);
+            this.lblSendMessage.TabIndex = 13;
+            this.lblSendMessage.Text = "Send Message:";
+            // 
+            // btnSendMessage
+            // 
+            this.btnSendMessage.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSendMessage.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnSendMessage.Enabled = false;
+            this.btnSendMessage.Location = new System.Drawing.Point(420, 38);
+            this.btnSendMessage.Name = "btnSendMessage";
+            this.btnSendMessage.Size = new System.Drawing.Size(85, 22);
+            this.btnSendMessage.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSendMessage.TabIndex = 12;
+            this.btnSendMessage.Text = "Send";
+            this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
+            // 
+            // btnSideTab
+            // 
+            this.btnSideTab.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSideTab.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnSideTab.Location = new System.Drawing.Point(669, 0);
+            this.btnSideTab.Name = "btnSideTab";
+            this.btnSideTab.Size = new System.Drawing.Size(37, 25);
+            this.btnSideTab.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSideTab.TabIndex = 11;
+            this.btnSideTab.Text = ">>";
+            this.btnSideTab.Click += new System.EventHandler(this.btnSideTab_Click);
+            // 
+            // lblViewers
+            // 
+            this.lblViewers.AutoSize = true;
+            this.lblViewers.BackColor = System.Drawing.SystemColors.Window;
+            this.lblViewers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblViewers.Location = new System.Drawing.Point(511, 22);
+            this.lblViewers.Name = "lblViewers";
+            this.lblViewers.Size = new System.Drawing.Size(55, 13);
+            this.lblViewers.TabIndex = 10;
+            this.lblViewers.Text = "Viewers:";
+            // 
+            // lblConsole
+            // 
+            this.lblConsole.AutoSize = true;
+            this.lblConsole.BackColor = System.Drawing.SystemColors.Window;
+            this.lblConsole.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConsole.Location = new System.Drawing.Point(0, 72);
+            this.lblConsole.Name = "lblConsole";
+            this.lblConsole.Size = new System.Drawing.Size(90, 13);
+            this.lblConsole.TabIndex = 9;
+            this.lblConsole.Text = "Console Chat: ";
+            // 
+            // txtUsers
+            // 
+            this.txtUsers.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtUsers.Border.Class = "TextBoxBorder";
+            this.txtUsers.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsers.ForeColor = System.Drawing.Color.Black;
+            this.txtUsers.Location = new System.Drawing.Point(507, 88);
+            this.txtUsers.Multiline = true;
+            this.txtUsers.Name = "txtUsers";
+            this.txtUsers.ReadOnly = true;
+            this.txtUsers.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtUsers.Size = new System.Drawing.Size(200, 400);
+            this.txtUsers.TabIndex = 8;
+            // 
+            // txtChat
+            // 
+            this.txtChat.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtChat.Border.Class = "TextBoxBorder";
+            this.txtChat.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtChat.ForeColor = System.Drawing.Color.Black;
+            this.txtChat.Location = new System.Drawing.Point(3, 88);
+            this.txtChat.Multiline = true;
+            this.txtChat.Name = "txtChat";
+            this.txtChat.ReadOnly = true;
+            this.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtChat.Size = new System.Drawing.Size(498, 402);
+            this.txtChat.TabIndex = 7;
+            // 
+            // lblChannel
+            // 
+            this.lblChannel.AutoSize = true;
+            this.lblChannel.BackColor = System.Drawing.SystemColors.Window;
+            this.lblChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblChannel.Location = new System.Drawing.Point(0, 8);
+            this.lblChannel.Name = "lblChannel";
+            this.lblChannel.Size = new System.Drawing.Size(61, 13);
+            this.lblChannel.TabIndex = 2;
+            this.lblChannel.Text = "Channel: ";
+            // 
+            // txtChannel
+            // 
+            this.txtChannel.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.txtChannel.Border.Class = "TextBoxBorder";
+            this.txtChannel.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtChannel.ForeColor = System.Drawing.Color.Black;
+            this.txtChannel.Location = new System.Drawing.Point(67, 4);
+            this.txtChannel.Name = "txtChannel";
+            this.txtChannel.Size = new System.Drawing.Size(167, 22);
+            this.txtChannel.TabIndex = 1;
+            // 
+            // btnConnect
+            // 
+            this.btnConnect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnConnect.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnConnect.Location = new System.Drawing.Point(240, 3);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(265, 24);
+            this.btnConnect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnConnect.TabIndex = 0;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // tabHome
+            // 
+            this.tabHome.AttachedControl = this.tabControlPanel1;
+            this.tabHome.Name = "tabHome";
+            this.tabHome.Text = "Home";
+            this.tabHome.Click += new System.EventHandler(this.tabHome_Click);
             // 
             // tabControlPanel2
             // 
@@ -680,244 +930,6 @@
             this.tabSettings.Text = "Settings";
             this.tabSettings.Click += new System.EventHandler(this.tabSettings_Click);
             // 
-            // tabControlPanel1
-            // 
-            this.tabControlPanel1.Controls.Add(this.tabControlPanel3);
-            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel1.Location = new System.Drawing.Point(0, 27);
-            this.tabControlPanel1.Name = "tabControlPanel1";
-            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(712, 491);
-            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.White;
-            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
-            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel1.Style.GradientAngle = 90;
-            this.tabControlPanel1.TabIndex = 1;
-            this.tabControlPanel1.TabItem = this.tabHome;
-            this.tabControlPanel1.Text = "Home";
-            // 
-            // tabControlPanel3
-            // 
-            this.tabControlPanel3.Controls.Add(this.label15);
-            this.tabControlPanel3.Controls.Add(this.lblFollowersNum);
-            this.tabControlPanel3.Controls.Add(this.label13);
-            this.tabControlPanel3.Controls.Add(this.lblViewersNumber);
-            this.tabControlPanel3.Controls.Add(this.txtMessage);
-            this.tabControlPanel3.Controls.Add(this.lblSendMessage);
-            this.tabControlPanel3.Controls.Add(this.btnSendMessage);
-            this.tabControlPanel3.Controls.Add(this.btnSideTab);
-            this.tabControlPanel3.Controls.Add(this.lblViewers);
-            this.tabControlPanel3.Controls.Add(this.lblConsole);
-            this.tabControlPanel3.Controls.Add(this.txtUsers);
-            this.tabControlPanel3.Controls.Add(this.txtChat);
-            this.tabControlPanel3.Controls.Add(this.lblChannel);
-            this.tabControlPanel3.Controls.Add(this.txtChannel);
-            this.tabControlPanel3.Controls.Add(this.btnConnect);
-            this.tabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel3.Location = new System.Drawing.Point(1, 1);
-            this.tabControlPanel3.Name = "tabControlPanel3";
-            this.tabControlPanel3.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel3.Size = new System.Drawing.Size(710, 489);
-            this.tabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.White;
-            this.tabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
-            this.tabControlPanel3.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right) 
-            | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel3.Style.GradientAngle = 90;
-            this.tabControlPanel3.TabIndex = 3;
-            this.tabControlPanel3.TabItem = this.tabHome;
-            this.tabControlPanel3.Text = "Home";
-            this.tabControlPanel3.Enter += new System.EventHandler(this.tabControlPanel3_Enter);
-            // 
-            // lblFollowersNum
-            // 
-            this.lblFollowersNum.AutoSize = true;
-            this.lblFollowersNum.BackColor = System.Drawing.SystemColors.Window;
-            this.lblFollowersNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFollowersNum.Location = new System.Drawing.Point(581, 4);
-            this.lblFollowersNum.Name = "lblFollowersNum";
-            this.lblFollowersNum.Size = new System.Drawing.Size(14, 13);
-            this.lblFollowersNum.TabIndex = 17;
-            this.lblFollowersNum.Text = "0";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.SystemColors.Window;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(511, 4);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(64, 13);
-            this.label13.TabIndex = 16;
-            this.label13.Text = "Followers:";
-            // 
-            // lblViewersNumber
-            // 
-            this.lblViewersNumber.AutoSize = true;
-            this.lblViewersNumber.BackColor = System.Drawing.SystemColors.Window;
-            this.lblViewersNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblViewersNumber.Location = new System.Drawing.Point(581, 22);
-            this.lblViewersNumber.Name = "lblViewersNumber";
-            this.lblViewersNumber.Size = new System.Drawing.Size(14, 13);
-            this.lblViewersNumber.TabIndex = 15;
-            this.lblViewersNumber.Text = "0";
-            // 
-            // txtMessage
-            // 
-            this.txtMessage.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtMessage.Border.Class = "TextBoxBorder";
-            this.txtMessage.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtMessage.Enabled = false;
-            this.txtMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMessage.ForeColor = System.Drawing.Color.Black;
-            this.txtMessage.Location = new System.Drawing.Point(97, 38);
-            this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(317, 22);
-            this.txtMessage.TabIndex = 14;
-            // 
-            // lblSendMessage
-            // 
-            this.lblSendMessage.AutoSize = true;
-            this.lblSendMessage.BackColor = System.Drawing.SystemColors.Window;
-            this.lblSendMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSendMessage.Location = new System.Drawing.Point(0, 42);
-            this.lblSendMessage.Name = "lblSendMessage";
-            this.lblSendMessage.Size = new System.Drawing.Size(94, 13);
-            this.lblSendMessage.TabIndex = 13;
-            this.lblSendMessage.Text = "Send Message:";
-            // 
-            // btnSendMessage
-            // 
-            this.btnSendMessage.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSendMessage.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnSendMessage.Enabled = false;
-            this.btnSendMessage.Location = new System.Drawing.Point(420, 38);
-            this.btnSendMessage.Name = "btnSendMessage";
-            this.btnSendMessage.Size = new System.Drawing.Size(85, 22);
-            this.btnSendMessage.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSendMessage.TabIndex = 12;
-            this.btnSendMessage.Text = "Send";
-            this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
-            // 
-            // btnSideTab
-            // 
-            this.btnSideTab.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSideTab.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnSideTab.Location = new System.Drawing.Point(669, 0);
-            this.btnSideTab.Name = "btnSideTab";
-            this.btnSideTab.Size = new System.Drawing.Size(37, 25);
-            this.btnSideTab.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSideTab.TabIndex = 11;
-            this.btnSideTab.Text = ">>";
-            this.btnSideTab.Click += new System.EventHandler(this.btnSideTab_Click);
-            // 
-            // lblViewers
-            // 
-            this.lblViewers.AutoSize = true;
-            this.lblViewers.BackColor = System.Drawing.SystemColors.Window;
-            this.lblViewers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblViewers.Location = new System.Drawing.Point(511, 22);
-            this.lblViewers.Name = "lblViewers";
-            this.lblViewers.Size = new System.Drawing.Size(55, 13);
-            this.lblViewers.TabIndex = 10;
-            this.lblViewers.Text = "Viewers:";
-            // 
-            // lblConsole
-            // 
-            this.lblConsole.AutoSize = true;
-            this.lblConsole.BackColor = System.Drawing.SystemColors.Window;
-            this.lblConsole.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConsole.Location = new System.Drawing.Point(0, 72);
-            this.lblConsole.Name = "lblConsole";
-            this.lblConsole.Size = new System.Drawing.Size(90, 13);
-            this.lblConsole.TabIndex = 9;
-            this.lblConsole.Text = "Console Chat: ";
-            // 
-            // txtUsers
-            // 
-            this.txtUsers.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtUsers.Border.Class = "TextBoxBorder";
-            this.txtUsers.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsers.ForeColor = System.Drawing.Color.Black;
-            this.txtUsers.Location = new System.Drawing.Point(507, 88);
-            this.txtUsers.Multiline = true;
-            this.txtUsers.Name = "txtUsers";
-            this.txtUsers.ReadOnly = true;
-            this.txtUsers.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtUsers.Size = new System.Drawing.Size(200, 400);
-            this.txtUsers.TabIndex = 8;
-            // 
-            // txtChat
-            // 
-            this.txtChat.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtChat.Border.Class = "TextBoxBorder";
-            this.txtChat.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtChat.ForeColor = System.Drawing.Color.Black;
-            this.txtChat.Location = new System.Drawing.Point(3, 88);
-            this.txtChat.Multiline = true;
-            this.txtChat.Name = "txtChat";
-            this.txtChat.ReadOnly = true;
-            this.txtChat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtChat.Size = new System.Drawing.Size(498, 402);
-            this.txtChat.TabIndex = 7;
-            // 
-            // lblChannel
-            // 
-            this.lblChannel.AutoSize = true;
-            this.lblChannel.BackColor = System.Drawing.SystemColors.Window;
-            this.lblChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChannel.Location = new System.Drawing.Point(0, 8);
-            this.lblChannel.Name = "lblChannel";
-            this.lblChannel.Size = new System.Drawing.Size(61, 13);
-            this.lblChannel.TabIndex = 2;
-            this.lblChannel.Text = "Channel: ";
-            // 
-            // txtChannel
-            // 
-            this.txtChannel.BackColor = System.Drawing.Color.White;
-            // 
-            // 
-            // 
-            this.txtChannel.Border.Class = "TextBoxBorder";
-            this.txtChannel.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtChannel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtChannel.ForeColor = System.Drawing.Color.Black;
-            this.txtChannel.Location = new System.Drawing.Point(67, 4);
-            this.txtChannel.Name = "txtChannel";
-            this.txtChannel.Size = new System.Drawing.Size(167, 22);
-            this.txtChannel.TabIndex = 1;
-            // 
-            // btnConnect
-            // 
-            this.btnConnect.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnConnect.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnConnect.Location = new System.Drawing.Point(240, 3);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(265, 24);
-            this.btnConnect.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnConnect.TabIndex = 0;
-            this.btnConnect.Text = "Connect";
-            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
-            // 
-            // tabHome
-            // 
-            this.tabHome.AttachedControl = this.tabControlPanel1;
-            this.tabHome.Name = "tabHome";
-            this.tabHome.Text = "Home";
-            // 
             // tabControlPanel4
             // 
             this.tabControlPanel4.Controls.Add(this.lblFollowerNum2);
@@ -1026,6 +1038,7 @@
             this.tabIModsandFollowers.Name = "tabIModsandFollowers";
             this.tabIModsandFollowers.Text = "Moderators/Followers";
             this.tabIModsandFollowers.Visible = false;
+            this.tabIModsandFollowers.Click += new System.EventHandler(this.tabIModsandFollowers_Click);
             // 
             // timerUpdateGUI
             // 
@@ -1169,17 +1182,6 @@
             this.timerUpdateUserList.Interval = 15000;
             this.timerUpdateUserList.Tick += new System.EventHandler(this.timerUpdateUserList_Tick);
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.BackColor = System.Drawing.SystemColors.Window;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(504, 72);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(79, 13);
-            this.label15.TabIndex = 18;
-            this.label15.Text = "Viewers List:";
-            // 
             // MJRBot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1205,13 +1207,13 @@
             this.Load += new System.EventHandler(this.MJRBot_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).EndInit();
             this.tabControlMain.ResumeLayout(false);
+            this.tabControlPanel1.ResumeLayout(false);
+            this.tabControlPanel3.ResumeLayout(false);
+            this.tabControlPanel3.PerformLayout();
             this.tabControlPanel2.ResumeLayout(false);
             this.tabControlPanel2.PerformLayout();
             this.panelEx1.ResumeLayout(false);
             this.panelEx1.PerformLayout();
-            this.tabControlPanel1.ResumeLayout(false);
-            this.tabControlPanel3.ResumeLayout(false);
-            this.tabControlPanel3.PerformLayout();
             this.tabControlPanel4.ResumeLayout(false);
             this.tabControlPanel4.PerformLayout();
             this.ResumeLayout(false);

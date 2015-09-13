@@ -75,7 +75,6 @@ namespace MJRBot
                     String result2;
                     WebClient web2 = new WebClient();
                     String url;
-                    Console.WriteLine("Set " + currentSet);
                     if(currentSet == 100)
                         url = "https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?limit=" + currentSet;
                     else
@@ -88,7 +87,6 @@ namespace MJRBot
                     String oldname = "";
                     for (int k = 0; k < 100; k++)
                     {
-                        Console.WriteLine("Follower " + k);
                         if (k == 0)
                         {
                             oldname = result.Substring(result.IndexOf("display_name") + 15);

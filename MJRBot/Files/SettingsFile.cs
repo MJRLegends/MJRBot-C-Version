@@ -218,7 +218,6 @@ namespace MJRBot
         /// <returns></returns>
         public static String getSetting(String channel, String settingName)
         {
-            Console.WriteLine("Getting " + settingName + " from " + channel);
             XmlDocument xDoc = new XmlDocument();
             if (settingName.Equals("Username") || settingName.Equals("Password"))
                 xDoc.Load(fileName2);

@@ -125,7 +125,6 @@ namespace MJRBot
             txtMessage.Enabled = false;
             btnSendMessage.Enabled = false;
             tabIModsandFollowers.Visible = false;
-            tabSettings.Visible = false;
             txtFollowers.Text = "";
             txtModerators.Text = "";
             Viewers.moderators.Clear();
@@ -396,6 +395,7 @@ namespace MJRBot
         }
         private void timerUpdateGUI_Tick(object sender, EventArgs e)
         {
+            Followers.checkForNewFollowers();
             txtChat.Text = BotClient.getChatMessages();
             lblViewersNumber.Text = BotClient.onlineUsers.Count.ToString();
             lblFollowersNum.Text = Followers.followersNum.ToString();
@@ -404,6 +404,11 @@ namespace MJRBot
         }
         private void timerUpdateUserList_Tick(object sender, EventArgs e)
         {
+            if (Followers.followers != null)
+                if (Followers.followers.Count > 1)
+                    foreach (String user in Followers.followers)
+                        if(!txtFollowers.Text.ToLower().Contains(user.ToLower()))
+                            txtFollowers.AppendText(user.ToLower() + Environment.NewLine);
             txtModerators.Text = "";
             if (Viewers.moderators != null)
                 foreach (String user in Viewers.moderators)

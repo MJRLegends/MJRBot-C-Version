@@ -52,7 +52,8 @@ namespace MJRBot
                     {
                         oldname = result.Substring(result.IndexOf("display_name") + 15);
                         oldname = oldname.Substring(0, oldname.IndexOf("\""));
-                        followers.Add(oldname.ToLower());
+                        if (!followers.Contains(oldname.ToLower()))
+                            followers.Add(oldname.ToLower());
                     }
                     else
                     {
@@ -61,7 +62,8 @@ namespace MJRBot
                         temp = temp.Substring(temp.IndexOf("logo"));
                         temp = temp.Substring(temp.IndexOf("display_name") + 15);
                         temp = temp.Substring(0, temp.IndexOf("\""));
-                        followers.Add(temp.ToLower());
+                        if (!followers.Contains(temp.ToLower()))
+                            followers.Add(temp.ToLower());
                         oldname = temp;
                     }
                 }
@@ -70,13 +72,13 @@ namespace MJRBot
             {
                 int left = times;
                 int currentSet = 0;
-                for (int j = 0; j < left; j++)
+                while(left > 0)
                 {
                     String result2;
                     WebClient web2 = new WebClient();
                     String url;
-                    if(currentSet == 100)
-                        url = "https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?limit=" + currentSet;
+                    if(currentSet == 0)
+                        url = "https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?limit=100";
                     else
                         url = "https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?direction=DESC&limit=100&offset=" + currentSet;
                     System.IO.Stream stream2 = web.OpenRead(url);
@@ -87,6 +89,11 @@ namespace MJRBot
                     String oldname = "";
                     for (int k = 0; k < 100; k++)
                     {
+                        if (left == 0)
+                        {
+                            BotClient.chatMessages.Add("[MJRBot Info]" + "MJRBot has got " + +followers.Count + " followers!");
+                            return;
+                        }
                         if (k == 0)
                         {
                             oldname = result.Substring(result.IndexOf("display_name") + 15);
@@ -107,7 +114,6 @@ namespace MJRBot
                         }
                     }
                     currentSet = currentSet + 100;
-                    
                 }
             }
             BotClient.chatMessages.Add("[MJRBot Info]" + "MJRBot has got " + +followers.Count + " followers!");
@@ -124,7 +130,11 @@ namespace MJRBot
             {
                 result = reader.ReadToEnd();
             }
-            int times = 10;
+            int times;
+            if (followersNum >= 10)
+                times = 10;
+            else
+                times = followersNum;
             String oldname = "";
             for (int j = 0; j < times; j++)
             {

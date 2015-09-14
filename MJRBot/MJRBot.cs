@@ -420,39 +420,9 @@ namespace MJRBot
             txtModerators.ScrollToCaret();
             if (BotClient.setup)
             {
-                for (int i = 0; i < BotClient.onlineUsers.Count; i++)
-                {
-                    if (!txtUsers.Text.Contains(BotClient.onlineUsers[i]))
-                    {
-                        if(txtUsers.TextLength < 1)
-                            txtUsers.Text = (Environment.NewLine + BotClient.onlineUsers[i].ToString());
-                        else
-                            txtUsers.AppendText(Environment.NewLine + BotClient.onlineUsers[i].ToString());
-                    }
-                }
+                txtUsers.Text = BotClient.getUserList();
                 txtUsers.SelectionStart = 0;
                 txtUsers.ScrollToCaret();
-                String[] users = txtUsers.Lines;
-                foreach (String user in users)
-                {
-                    String newUser = "";
-                    if (user.Contains('\n'))
-                        newUser = user.Substring(0, user.Length - 1);
-                    else
-                        newUser = user;
-
-                    if (newUser.Contains('\r'))
-                        return;
-                    if (!BotClient.onlineUsers.Contains(newUser))
-                    {
-                        if (!newUser.Equals(""))
-                        {
-                            if (txtUsers.Text.Contains(newUser))
-                                txtUsers.Text.Replace(user, string.Empty);
-                        }
-                    }
-                    
-                }
             }
             else
             {
@@ -460,6 +430,7 @@ namespace MJRBot
                 BotClient.setup = true;
             }
         }
+        
         private void timerAutoPoints_Tick(object sender, EventArgs e)
         {
             if (SettingsFile.getSetting(BotClient.getChannel(false), "Points").Equals("true"))

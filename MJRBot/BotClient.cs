@@ -155,6 +155,8 @@ namespace MJRBot
         /// <param name="chatLine"></param>
         private static void parseChatLine(string chatLine)
         {
+            if (chatLine.Contains("PING"))
+                socketCommands.Add("PONG :tmi.twitch.tv");
             if (chatLine.StartsWith(":"))
             {
                 if (chatLine.Contains("PRIVMSG"))

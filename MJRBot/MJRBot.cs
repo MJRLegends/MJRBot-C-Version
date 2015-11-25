@@ -615,6 +615,7 @@ namespace MJRBot
                 try
                 {
                     Directory.CreateDirectory(@"C:\MJR_Bot\");
+                    SettingsFile.loadMain();
                 }
                 catch (Exception ex)
                 {

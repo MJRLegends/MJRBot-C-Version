@@ -48,7 +48,7 @@ namespace MJRBot
                 socketCommands.Add("CAP REQ :twitch.tv/commands");
                 socketCommands.Add("CAP REQ :twitch.tv/membership");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 chatMessages.Add("Error! Message: " + ex.Message);
             }

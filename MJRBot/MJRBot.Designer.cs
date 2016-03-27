@@ -538,6 +538,7 @@
             // 
             this.comboChannel.DisplayMember = "Text";
             this.comboChannel.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboChannel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboChannel.FormattingEnabled = true;
             this.comboChannel.ItemHeight = 14;
             this.comboChannel.Location = new System.Drawing.Point(71, 59);

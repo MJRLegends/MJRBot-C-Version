@@ -62,7 +62,7 @@ namespace MJRBot
                 CommandsFile.load();
                 if (SettingsFile.getSetting(null, "Username") != "" && SettingsFile.getSetting(null, "Password") != "")
                 {
-                    BotClient.connectToServer("irc.twitch.tv", 6667);
+                    BotClient.connectToServer("irc.chat.twitch.tv", 6667);
                     BotClient.joinChannel(txtChannel.Text);
                     connected = true;
                     btnConnect.Text = "Disconnect";

@@ -15,7 +15,7 @@ namespace MJRBot
         {
             String result;
             WebClient web = new WebClient();
-            System.IO.Stream stream = web.OpenRead("https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower());
+            System.IO.Stream stream = web.OpenRead("https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "?client_id=it37a0q1pxypsijpd94h6rdhiq3j08");
             using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
             {
                 result = reader.ReadToEnd();
@@ -32,7 +32,7 @@ namespace MJRBot
         {
             String result;
             WebClient web = new WebClient();
-            System.IO.Stream stream = web.OpenRead("https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?limit=100");
+            System.IO.Stream stream = web.OpenRead("https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?limit=100\u0026client_id=it37a0q1pxypsijpd94h6rdhiq3j08");
             using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
             {
                 result = reader.ReadToEnd();
@@ -78,9 +78,9 @@ namespace MJRBot
                     WebClient web2 = new WebClient();
                     String url;
                     if(currentSet == 0)
-                        url = "https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?limit=100";
+                        url = "https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?limit=100\u0026client_id=it37a0q1pxypsijpd94h6rdhiq3j08";
                     else
-                        url = "https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?direction=DESC&limit=100&offset=" + currentSet;
+                        url = "https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?direction=DESC&limit=100&offset=" + currentSet + "\u0026client_id=it37a0q1pxypsijpd94h6rdhiq3j08";
                     System.IO.Stream stream2 = web.OpenRead(url);
                     using (System.IO.StreamReader reader2 = new System.IO.StreamReader(stream2))
                     {
@@ -125,7 +125,7 @@ namespace MJRBot
             String followersList = "";
             String result;
             WebClient web = new WebClient();
-            System.IO.Stream stream = web.OpenRead("https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?limit=100");
+            System.IO.Stream stream = web.OpenRead("https://api.twitch.tv/kraken/channels/" + BotClient.getChannel(false).ToLower() + "/follows?limit=100\u0026client_id=it37a0q1pxypsijpd94h6rdhiq3j08");
             using (System.IO.StreamReader reader = new System.IO.StreamReader(stream))
             {
                 result = reader.ReadToEnd();
